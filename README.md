@@ -1,7 +1,7 @@
-# Kingtana: un sitio web de comercio electrónico funcional.
-## Proyecto Integrador grupal para el curso de Programación Web de la Universidad de Lima.
-### Profesor: Hernan Alejandro Quintana Cruz.
-### Integrantes: José Luis Velis, Alejandra Falcon, Joaquín Aquije y Renzo Vasquez.
+# NeuroBreak: una plataforma para cuidar de ti.
+## Proyecto Integrador grupal para el curso de Ingeniería de Software de la Universidad de Lima.
+### Profesor: Hernán Nina Hanco.
+### Integrantes: José Luis Velis, Auristela Marroquín, Alejandra Falcon, Diego Salirrosas y Renzo Vasquez.
 
 ### Funcionalidades principales implementadas:
 
@@ -18,7 +18,7 @@
 ...
 
 
-### Proyecto presentado el 02/12/24, clase de L:7-10pm. Calificación: 15/20.
+### Proyecto presentado el ??/11/25, clases de X-V:7-10am. Calificación: ??/20.
 
 ### Sobre los archivos:
 -  Frontend folder: Contiene los archivos necesarios para la parte visual de la web, con la cual el usuario interactúa directamente.

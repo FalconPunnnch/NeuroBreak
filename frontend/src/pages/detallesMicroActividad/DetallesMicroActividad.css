@@ -1,0 +1,161 @@
+.detalles-actividad {
+  background-color: #ffffff;
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  padding: 40px 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Botón Volver */
+.volver-btn {
+  position: absolute;
+  left: 47px;
+  top: 45px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.volver-btn:hover {
+  transform: translateX(-5px);
+}
+
+.arrow-icon {
+  width: 34px;
+  height: 22px;
+  color: #1c3b4e;
+}
+
+.volver-text {
+  color: #1c3b4e;
+  font-family: "Istok Web", Helvetica;
+  font-size: 24px;
+  font-weight: 700;
+  -webkit-text-stroke: 1px #1c3b4e;
+}
+
+/* Caja de información principal */
+.info-box {
+  background: rgba(147, 189, 204, 0.8);
+  border-radius: 20px 20px 0 0;
+  width: 580px;
+  padding: 36px 34px 40px;
+  margin-top: 70px;
+  margin-bottom: 30px;
+}
+
+.actividad-titulo {
+  color: #ffffff;
+  font-size: 3rem;
+  font-weight: 600;
+  text-align: center;
+  margin: 0 0 30px 0;
+  line-height: 1.2;
+}
+
+.actividad-descripcion {
+  color: #ffffff;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
+  text-align: left;
+}
+
+/* Cajas de pasos */
+.paso-box {
+  background: rgba(147, 189, 204, 0.6);
+  border-radius: 20px;
+  width: 526px;
+  height: 45px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  margin-bottom: 15px;
+}
+
+.paso-1 {
+  margin-top: 30px;
+}
+
+.paso-2 {
+  margin-top: 15px;
+  margin-bottom: 30px;
+}
+
+.paso-label {
+  color: #ffffff;
+  font-family: "Inter", Helvetica;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.paso-tiempo {
+  color: #ffffff;
+  font-family: "Inter", Helvetica;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: right;
+}
+
+/* Botón Empezar sesión */
+.empezar-btn {
+  background: #1c3b4e;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 25px 50px;
+  font-family: "Inter", Helvetica;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 30px;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.empezar-btn:hover {
+  background: #2c5f6f;
+  transform: translateY(-2px);
+}
+
+.empezar-btn:active {
+  transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .detalles-actividad {
+    padding: 30px 20px;
+  }
+
+  .info-box,
+  .paso-box {
+    width: 100%;
+    max-width: 580px;
+  }
+
+  .actividad-titulo {
+    font-size: 2rem;
+  }
+
+  .volver-btn {
+    left: 20px;
+    top: 20px;
+  }
+
+  .volver-text {
+    font-size: 20px;
+  }
+
+  .empezar-btn {
+    width: 100%;
+    max-width: 400px;
+  }
+}

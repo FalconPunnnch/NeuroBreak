@@ -1,5 +1,6 @@
 # NeuroBreak: una plataforma para cuidar de ti.
-## Proyecto Integrador grupal para el curso de Ingeniería de Software de la Universidad de Lima.
+## Proyecto Integrador grupal para el curso de Ingeniería de Software II de la Universidad de Lima.
+### Carrera de Ingeniería de Sistemas.
 ### Profesor: Hernán Nina Hanco.
 ### Integrantes: José Luis Velis, Auristela Marroquín, Alejandra Falcon, Diego Salirrosas y Renzo Vasquez.
 

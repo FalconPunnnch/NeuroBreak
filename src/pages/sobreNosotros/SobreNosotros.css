@@ -1,0 +1,287 @@
+.sobre-nosotros-page {
+  width: 100%;
+  min-height: 100vh;
+  background: white;
+  scroll-behavior: smooth;
+}
+
+/* Asegura que cada sección ocupe toda la pantalla */
+#sobre-section,
+#como-funciona-section {
+  min-height: 100vh;
+  scroll-margin-top: 131px;
+}
+
+/* Sección Sobre NeuroBreak */
+.sobre-section {
+  position: relative;
+  background: #FFF3E3;
+  padding: 80px 40px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sobre-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.sobre-container {
+  max-width: 1400px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  position: relative;
+  z-index: 1;
+}
+
+.sobre-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  width: 100%;
+}
+
+/* Fila 1: Caja izquierda + Logo derecha */
+.row-1 {
+  justify-content: flex-start;
+}
+
+/* Fila 2: Birrete izquierda + Caja derecha */
+.row-2 {
+  justify-content: space-between;
+}
+
+.sobre-box {
+  background: #93BDCC;
+  border-radius: 20px;
+  padding: 40px 50px;
+  width: 45%;
+  min-width: 350px;
+  max-width: 550px;
+}
+
+.sobre-title {
+  color: white;
+  font-size: 2.2rem;
+  font-weight: 600;
+  margin-bottom: 25px;
+  text-align: left;
+}
+
+.sobre-text {
+  color: white;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  text-align: left;
+  margin-bottom: 15px;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40%;
+}
+
+.sobre-image {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  object-fit: contain;
+}
+
+.birrete-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35%;
+}
+
+.birrete-img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Sección Cómo Funciona */
+.como-funciona-section {
+  position: relative;
+  background: #0C2D33;
+  padding: 100px 40px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.como-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.como-title {
+  color: white;
+  font-size: 3.5rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 100px;
+  position: relative;
+  z-index: 1;
+}
+
+.pasos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 80px;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto 80px;
+  position: relative;
+  z-index: 1;
+}
+
+.paso-card {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.paso-text {
+  color: white;
+  font-size: 1.5rem;
+  line-height: 1.8;
+  max-width: 365px;
+  margin: 0 auto;
+}
+
+.register-btn-como {
+  background: #EDC04E;
+  color: white;
+  border: none;
+  padding: 20px 60px;
+  font-size: 1.5rem;
+  border-radius: 20px 20px 0 0;
+  cursor: pointer;
+  transition: background 0.3s;
+  position: relative;
+  z-index: 1;
+  font-weight: 600;
+  display: block;
+  margin: 0 auto;
+}
+
+.register-btn-como:hover {
+  background: #d4a520;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .sobre-row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .sobre-box {
+    width: 85%;
+    max-width: 600px;
+  }
+
+  .logo-container,
+  .birrete-container {
+    width: 60%;
+  }
+
+  .pasos-grid {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sobre-section,
+  .como-funciona-section {
+    padding: 60px 20px;
+  }
+
+  .sobre-title {
+    font-size: 1.8rem;
+  }
+
+  .sobre-text {
+    font-size: 1rem;
+  }
+
+  .como-title {
+    font-size: 2.5rem;
+    margin-bottom: 60px;
+  }
+
+  .paso-text {
+    font-size: 1.2rem;
+  }
+
+  .sobre-box {
+    width: 95%;
+    min-width: auto;
+    padding: 30px;
+  }
+
+  .logo-container,
+  .birrete-container {
+    width: 80%;
+  }
+
+  .register-btn-como {
+    padding: 15px 40px;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .sobre-title {
+    font-size: 1.5rem;
+  }
+
+  .como-title {
+    font-size: 2rem;
+  }
+}
+
+.register-btn-como {
+  background: #EDC04E;
+  color: white;
+  border: none;
+  padding: 20px 60px;
+  font-size: 1.5rem;
+  border-radius: 20px 20px 0 0;
+  cursor: pointer;
+  transition: background 0.3s;
+  position: relative;
+  z-index: 1;
+  font-weight: 600;
+  display: block;
+  margin: 0 auto;
+  text-decoration: none;
+  text-align: center;
+  width: fit-content;
+}
+
+.register-btn-como:hover {
+  background: #d4a520;
+}

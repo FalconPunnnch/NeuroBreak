@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { Carousel } from "react-bootstrap";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "./Carrusel.css";
 
 const Carrusel = () => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-
-  // Datos del carrusel
   const slides = [
     {
       title: "Lorem ipsum",
@@ -20,56 +19,26 @@ const Carrusel = () => {
     }
   ];
 
-  // Funciones para navegar el carrusel
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-  };
-
-  const goToSlide = (index) => {
-    setCurrentSlide(index);
-  };
-
-  // Auto-play opcional (descomenta si lo quieres)
-  /*
-  useEffect(() => {
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [currentSlide]);
-  */
-
   return (
-    <div className="hero-section">
-      <div className="hero-background" />
-      <div className="hero-content">
-        <h1 className="hero-title">{slides[currentSlide].title}</h1>
-        <p className="hero-text">{slides[currentSlide].text}</p>
-      </div>
-      
-      {/* Carousel dots */}
-      <div className="carousel-dots">
-        {slides.map((_, index) => (
-          <div
-            key={index}
-            className={`dot ${currentSlide === index ? 'active' : ''}`}
-            onClick={() => goToSlide(index)}
-          />
+    <section className="hero-section d-flex align-items-center justify-content-center text-center text-white">
+      <Carousel
+        indicators
+        controls
+        interval={5000}
+        pause="hover"
+        className="w-100"
+      >
+        {slides.map((slide, index) => (
+          <Carousel.Item key={index}>
+            <div className="hero-background" />
+            <div className="hero-content mx-auto">
+              <h1 className="hero-title mb-3">{slide.title}</h1>
+              <p className="hero-text mx-auto">{slide.text}</p>
+            </div>
+          </Carousel.Item>
         ))}
-      </div>
-
-      {/* Carousel arrows */}
-      <button className="carousel-btn prev" onClick={prevSlide}>
-        ‹
-      </button>
-      <button className="carousel-btn next" onClick={nextSlide}>
-        ›
-      </button>
-    </div>
+      </Carousel>
+    </section>
   );
 };
 

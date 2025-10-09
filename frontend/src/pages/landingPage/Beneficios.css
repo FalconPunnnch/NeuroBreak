@@ -1,0 +1,25 @@
+.beneficios-section {
+  background-color: #0c2d33;
+  color: #fff;
+}
+
+.beneficios-title {
+  font-size: 3rem;
+}
+
+.beneficio-img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+}
+
+.beneficio-subtitle {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.beneficio-text {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 320px;
+}

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Login.css";
 import Header from "../../header/Header";
-import brain1 from "../../../assets/brain-1.png";
+import brain from "../../../assets/brain-1.png";
 import pesas from "../../../assets/pesas.png";
 import pieza from "../../../assets/pieza.png";
 
@@ -38,7 +38,7 @@ const Login = () => {
 
             <div className="d-flex justify-content-center flex-wrap gap-5">
               {[
-                { src: brain1, label: "Mente" },
+                { src: brain, label: "Mente" },
                 { src: pieza, label: "Creatividad" },
                 { src: pesas, label: "Cuerpo" },
               ].map((item, idx) => (

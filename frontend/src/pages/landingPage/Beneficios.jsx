@@ -1,8 +1,8 @@
 import React from "react";
 import "./Beneficios.css";
-import brain1 from "../../assets/brain-1.png";
-import pieza from "../../assets/pieza.png";
-import pesas from "../../assets/pesas.png";
+import brain1 from "../../imagenes/brain-1.png";
+import pieza from "../../imagenes/pieza.png";
+import pesas from "../../imagenes/pesas.png";
 
 const Beneficios = () => {
   return (

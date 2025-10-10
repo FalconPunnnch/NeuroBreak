@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logoNb from "../../assets/logo-NB.png";
+import logoNb from "../../imagenes/NeuroBreak.png";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Header.css'; // Para mantener tus colores personalizados
 

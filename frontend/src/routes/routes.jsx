@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { LandingPage } from '../pages/landingPage/LandingPage';
 import SobreNosotros from '../pages/sobreNosotros/SobreNosotros';
-import Registro from '../components/usuario/registro/Registro';
+import Registro from '../components/usuario/Registro/Registro';
 import Login from '../components/usuario/login/Login';
 import Catalogo from '../pages/catalogo/Catalogo';
 import DetallesMicroActividad from '../pages/detallesMicroActividad/DetallesMicroActividad';

@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Login.css";
 import Header from "../../header/Header";
-import brain from "../../../assets/brain-1.png";
-import pesas from "../../../assets/pesas.png";
-import pieza from "../../../assets/pieza.png";
+import brain from "../../../imagenes/brain-1.png";
+import pesas from "../../../imagenes/pesas.png";
+import pieza from "../../../imagenes/pieza.png";
 
 const Login = () => {
   const [formData, setFormData] = useState({

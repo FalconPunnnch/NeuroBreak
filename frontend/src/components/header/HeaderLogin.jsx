@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./HeaderLogin.css";
-import logoNb from "../../assets/logo-NB.png";
+import logoNb from "../../imagenes/NeuroBreak.png";
 
 const HeaderLogin = () => {
   const navigate = useNavigate();

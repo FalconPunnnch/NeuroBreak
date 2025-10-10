@@ -4,8 +4,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./SobreNosotros.css";
 import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
-import birrete from "../../assets/birrete.png";
-import image16 from "../../assets/image-16.png";
+import birrete from "../../imagenes/birrete.png";
+import image16 from "../../imagenes/wlogo.png";
 
 const SobreNosotros = () => {
   const location = useLocation();

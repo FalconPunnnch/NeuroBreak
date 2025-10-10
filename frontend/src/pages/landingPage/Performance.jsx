@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Performance.css";
-import birrete from "../../assets/birrete.png";
+import birrete from "../../imagenes/birrete.png";
 
 const Performance = () => {
   return (

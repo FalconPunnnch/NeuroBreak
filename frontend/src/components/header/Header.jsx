@@ -24,8 +24,8 @@ const Header = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div className="collapse navbar-collapse justify-content-center" id="navbarNav">
-          <ul className="navbar-nav gap-4">
+        <div className="collapse navbar-collapse justify-content-end align-items-center" id="navbarNav">
+          <ul className="navbar-nav gap-4 me-3">
             <li className="nav-item">
               <Link to="/" className="nav-link text-white fw-medium">Home</Link>
             </li>
@@ -45,7 +45,7 @@ const Header = () => {
         </div>
       </nav>
     </header>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

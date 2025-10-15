@@ -1,28 +1,43 @@
 .header {
-  background: linear-gradient(90deg, #A4C4D4 0%, #8BB4C9 100%);
-  padding: 10px 0;
-  position: relative; /* 👈 evita que el contenido se monte encima */
-
+  background-color: #8cb7c4;
+  height: 80px; /* puedes ajustar este valor */
+  display: flex;
+  align-items: center; /* centra verticalmente el contenido */
+  padding: 0; /* quita padding que agregue altura extra */
+  border-bottom: #fff 2px solid;
 }
 
 .logo-nb {
-  height: 55px;
+  height: 100px;
   width: auto;
   object-fit: contain;
 }
 
+/* Menú responsive */
 .navbar-toggler {
-  border-color: rgba(255, 255, 255, 0.6);
+  border: none;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
 }
 
+.navbar-toggler:focus {
+  box-shadow: none;
+}
 
+.navbar-toggler-icon {
+  filter: invert(1);
+}
+
+/* Enlaces */
 .nav-link {
   position: relative;
-  transition: opacity 0.3s;
+  color: #fff !important;
+  transition: opacity 0.3s, transform 0.2s;
 }
 
 .nav-link:hover {
   opacity: 0.85;
+  transform: translateY(-1px);
 }
 
 .nav-link::after {
@@ -40,14 +55,28 @@
   width: 100%;
 }
 
+/* Botón login */
 .login-btn {
-  background: #D4A520;
+  background-color: #f3c045;
   color: white;
-  border-radius: 5px;
-  transition: background 0.3s;
+  border-radius: 12px;
+  transition: all 0.3s ease;
 }
 
 .login-btn:hover {
-  background: #B8941C;
-  color: white;
+  background-color: #d6a632;
+  color: #fff;
+}
+
+/* Ajustes responsive */
+@media (max-width: 991px) {
+  .login-btn {
+    display: block;
+    margin: 10px auto;
+  }
+
+  .navbar-collapse {
+    background-color: #8cb7c4;
+    padding: 15px 0;
+  }
 }

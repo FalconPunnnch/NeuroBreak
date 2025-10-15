@@ -28,7 +28,7 @@ const Login = () => {
     <div className="login-usuario bg-dark-blue text-white">
       <Header />
 
-      <div className="container py-5">
+      <div className="container py-6">
         <div className="row align-items-center g-5">
           {/* --- Columna Izquierda (Beneficios) --- */}
           <div className="col-lg-6 text-center">

@@ -36,3 +36,16 @@
     transform: rotate(360deg);
   }
 }
+
+::-webkit-scrollbar {
+  width: 8px; /* puedes dejarlo o poner 0 para ocultarla completamente */
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}

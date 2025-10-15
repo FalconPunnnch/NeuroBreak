@@ -5,7 +5,7 @@ import "./SobreNosotros.css";
 import Header from "../../components/header/Header";
 import Footer from "../../components/footer/Footer";
 import birrete from "../../imagenes/birrete.png";
-import image16 from "../../imagenes/wlogo.png";
+import image16 from "../../imagenes/UL-vector.png";
 
 const SobreNosotros = () => {
   const location = useLocation();

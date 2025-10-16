@@ -1,5 +1,5 @@
 .header {
-  background-color: #8cb7c4;
+  background-color: #93BDCC;
   height: 80px; /* puedes ajustar este valor */
   display: flex;
   align-items: center; /* centra verticalmente el contenido */
@@ -57,7 +57,7 @@
 
 /* Botón login */
 .login-btn {
-  background-color: #f3c045;
+  background-color: #EDC04E;
   color: white;
   border-radius: 12px;
   transition: all 0.3s ease;

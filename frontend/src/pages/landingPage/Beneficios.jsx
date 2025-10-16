@@ -1,8 +1,8 @@
-import React from "react";
-import "./Beneficios.css";
-import brain1 from "../../imagenes/brain-1.png";
-import pieza from "../../imagenes/pieza.png";
-import pesas from "../../imagenes/pesas.png";
+import React from "react"
+import "./Beneficios.css"
+import brain1 from "../../imagenes/brain-1.png"
+import pieza from "../../imagenes/pieza.png"
+import pesas from "../../imagenes/pesas.png"
 
 const Beneficios = () => {
   return (
@@ -40,7 +40,7 @@ const Beneficios = () => {
         </div>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default Beneficios;
+export default Beneficios

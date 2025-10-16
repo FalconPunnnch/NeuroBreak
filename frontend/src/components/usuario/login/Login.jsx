@@ -28,7 +28,7 @@ const Login = () => {
     <div className="login-usuario bg-dark-blue text-white">
       <Header />
 
-      <div className="container py-6">
+      <div className="container py-5 mt-4">
         <div className="row align-items-center g-5">
           {/* --- Columna Izquierda (Beneficios) --- */}
           <div className="col-lg-6 text-center">
@@ -56,7 +56,7 @@ const Login = () => {
           <div className="col-lg-6">
             <div className="bg-light-blue text-white rounded-4 shadow p-5 mx-auto" style={{ maxWidth: "450px" }}>
               {/* Tabs */}
-              <div className="d-flex justify-content-center gap-4 mb-4">
+              <div className="d-flex justify-content-center gap-5 mb-4">
                 <Link
                   to="/registro"
                   className="tab text-white text-decoration-none"
@@ -89,7 +89,7 @@ const Login = () => {
 
                 <Link
                   to="/recuperar-contrasena"
-                  className="text-white text-center fw-semibold small mt-1"
+                  className="text-white text-center fw-semibold mt-1"
                 >
                   ¿Olvidaste tu contraseña?
                 </Link>
@@ -105,7 +105,7 @@ const Login = () => {
 
               {/* Redes sociales */}
               <div className="text-center mt-4">
-                <p className="fw-semibold mb-3">O continúa con</p>
+                <h6 className="fw-semibold mb-3">O continúa con</h6>
                 <div className="d-flex justify-content-center gap-3">
                   {[
                     { icon: "bi-google", color: "text-danger" },

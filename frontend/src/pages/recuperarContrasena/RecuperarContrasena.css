@@ -9,12 +9,17 @@
 /* Botón volver */
 .volver-btn {
   position: absolute;
-  left: 80px;
-  top: 60px;
+  left: 0px;
+  top: 30px;
   font-size: 1.3rem;
   font-weight: 600;
   text-decoration: none;
   transition: opacity 0.3s;
+}
+
+.text-center{
+  font-weight: lighter;
+  font-size: small;
 }
 
 .volver-btn:hover {

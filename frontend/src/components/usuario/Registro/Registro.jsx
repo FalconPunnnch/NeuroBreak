@@ -27,7 +27,7 @@ const Registro = () => {
     <div className="registro bg-dark-blue min-vh-100 d-flex flex-column">
       <Header />
 
-      <div className="container flex-grow-1 d-flex align-items-center py-5">
+      <div className="container flex-grow-1 d-flex align-items-center py-5 mt-4">
         <div className="row w-100 align-items-center gy-5">
           {/* Columna izquierda */}
           <div className="col-lg-6 text-white text-center text-lg-start">
@@ -43,9 +43,9 @@ const Registro = () => {
 
           {/* Columna derecha */}
           <div className="col-lg-6 d-flex justify-content-center">
-            <div className="bg-light-blue text-white rounded-top p-5 w-100" style={{ maxWidth: "500px" }}>
+            <div className="bg-light-blue text-white rounded-4 p-5 w-100" style={{ maxWidth: "500px" }}>
               {/* Tabs */}
-              <div className="d-flex justify-content-center mb-4">
+              <div className="d-flex justify-content-center gap-5 mb-4">
                 <span className="tab active me-3">Crear cuenta</span>
                 <Link to="/login" className="tab text-white text-decoration-none">Iniciar Sesión</Link>
               </div>
@@ -100,14 +100,14 @@ const Registro = () => {
                   />
                 </div>
 
-                <button type="submit" className="btn btn-warning w-100 py-2 fw-semibold rounded-pill">
+                <button type="submit" className="btn btn-warning-custom fw-semibold mt-2">
                   Registrarme
                 </button>
               </form>
 
               {/* Redes sociales */}
               <div className="text-center mt-4">
-                <p className="fw-semibold small mb-3">o continúe con</p>
+                <h6 className="fw-semibold mb-3">o continúa con</h6>
                 <div className="d-flex justify-content-center gap-3">
                   <button
                     className="btn btn-light d-flex align-items-center justify-content-center rounded-circle social-btn"

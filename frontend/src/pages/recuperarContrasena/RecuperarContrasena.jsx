@@ -31,13 +31,13 @@ const RecuperarContrasena = () => {
 
       <div className="container d-flex flex-column align-items-center justify-content-center flex-grow-1 py-5 position-relative">
         {/* Botón Volver */}
-        <button className="btn btn-link text-white volver-btn" onClick={() => navigate("/login")}>
+        <button className="btn btn-link text-white volver-btn d-flex align-items-start" onClick={() => navigate("/login")}>
           ← Volver
         </button>
 
         {/* Caja de recuperación */}
-        <div className="bg-light-blue rounded-4 p-5 shadow recuperar-box text-center">
-          <h2 className="fw-semibold mb-4 position-relative recuperar-titulo">
+        <div className="bg-light-blue rounded-4 p-5 mt-5 mb-3 shadow recuperar-box text-center">
+          <h2 className="fw-semibold mb-5 pb-3 position-relative recuperar-titulo">
             ¿Olvidaste tu contraseña?
           </h2>
 

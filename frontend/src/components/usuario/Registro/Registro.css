@@ -40,3 +40,18 @@
   transform: scale(1.1);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
+
+.btn-warning-custom {
+  background-color: #EDC04E;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 14px 40px;
+  font-size: 1.2rem;
+  transition: background 0.3s ease;
+}
+
+.btn-warning-custom:hover {
+  background-color: #D4A520;
+  color: #fff;
+}

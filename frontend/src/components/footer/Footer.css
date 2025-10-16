@@ -1,12 +1,10 @@
 .footer {
-  background: linear-gradient(90deg, #A4C4D4 0%, #8BB4C9 100%);
+  background-color: #93BDCC;
 }
 
 .footer-link {
-  color: white;
-  text-decoration: none;
+  font-weight: 400;
   font-size: 1rem;
-  font-weight: 500;
   transition: opacity 0.3s;
 }
 
@@ -15,7 +13,14 @@
 }
 
 .footer-year {
-  color: white;
-  font-size: 1.1rem;
   font-weight: 600;
+  font-size: 1.1rem;
+  margin: 0 25px;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .footer-year {
+    margin: 10px 0;
+  }
 }

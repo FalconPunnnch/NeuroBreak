@@ -1,9 +1,10 @@
+/* Estilos originales de la sección y contenido */
 .hero-section {
   background: linear-gradient(135deg, #2c5f6f 0%, #1a3d4d 100%);
   min-height: 500px;
   position: relative;
   overflow: hidden;
-  padding: 60px 20px;
+  padding: 60px 20px 40px;
 }
 
 .hero-background {
@@ -33,24 +34,41 @@
   margin: 0 auto;
 }
 
-.carousel-indicators [data-bs-target] {
-  background-color: rgba(255, 255, 255, 0.5);
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-}
-
-.carousel-indicators .active {
-  background-color: white;
-}
-
+/* Estilos originales de los controles (flechas) */
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
   filter: invert(1);
 }
 
+/* Estilos para pantallas más pequeñas */
 @media (max-width: 768px) {
   .hero-title {
     font-size: 2.5rem;
   }
+}
+
+/* --- ESTILOS PARA INDICADORES PERSONALIZADOS --- */
+
+/* Contenedor para los nuevos indicadores */
+.custom-indicators-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 8px; /* Espacio entre los puntos */
+}
+
+/* Estilo para cada punto indicador */
+.indicator-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.5); /* Color de punto inactivo */
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Estilo para el punto del slide activo */
+.indicator-dot.active {
+  background-color: white; /* Color de punto activo */
 }

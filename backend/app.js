@@ -2,10 +2,10 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 
-import userRoutes from './scr/routes/userRoutes.js';
-import productRoutes from './scr/routes/productRoutes.js';
-import productCategoryRoutes from './scr/routes/productCategoryRoutes.js' 
-import './scr/models/index.js'; 
+import userRoutes from './src/routes/userRoutes.js';
+//import productRoutes from './src/routes/productRoutes.js';
+//import productCategoryRoutes from './src/routes/productCategoryRoutes.js' 
+//import './src/models/index.js'; 
 
 const app = express();
 app.use(bodyParser.json());

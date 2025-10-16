@@ -3,7 +3,7 @@ import Sequelize from 'sequelize'
 const hostname = '127.0.0.1'
 const username = 'postgres'
 const password = '123'
-const database = 'Kingtana'
+const database = 'NeuroBreak'
 const port = 5432
 const dialect = 'postgres'
 

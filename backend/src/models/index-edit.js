@@ -7,7 +7,7 @@ import Timer from './timer.js';
 
 
 User.hasMany(Timer, { foreignKey: 'category_id' });//cambiar foreingKey
-Timer.belongsTo(User, { foreignKey: 'category_id' });//cambiar foreingKey
+Timer.belongsTo(User, { foreignKey: 'category_id' });///////cambiar foreingKey
 
 MicroActividad.hasMany(Timer, { foreignKey: 'category_id' });//cambiar foreingKey
 Timer.belongsTo(MicroActividad, { foreignKey: 'category_id' }); //cambiar foreingKey

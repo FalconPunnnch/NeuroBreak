@@ -1,7 +1,6 @@
 import {DataTypes} from requiere('sequelize');
 import sequelize from requiere('../config/dataBase.js');
-import user from requiere ('./user.js');
-import MicroActividad from "./microActividad";
+
 
 const Timer = sequelize.define('Timer',{
     id: {

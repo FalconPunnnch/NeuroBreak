@@ -1,5 +1,5 @@
-import microActividadicroActividad from "../models/microActividad";
-import category from "../models/category";
+import MicroActividad from "../models/microActividad";
+
 
 async function listaMicroActividad() {
     return await MicroActividad.findAll();

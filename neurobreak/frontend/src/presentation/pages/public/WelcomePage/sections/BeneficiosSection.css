@@ -1,0 +1,127 @@
+/* HU01 - Beneficios Section Styles FINAL */
+/* Ubicación: frontend/src/presentation/pages/public/WelcomePage/sections/BeneficiosSection.css */
+
+.beneficios-section {
+  background-color: #0c2d33;
+  color: white;
+  padding: 80px 20px;
+}
+
+.section-title {
+  font-size: 3rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 4rem;
+  animation: fadeInDown 0.8s ease-out;
+}
+
+.beneficios-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.beneficio-card {
+  text-align: center;
+  animation: fadeInUp 0.8s ease-out;
+  animation-fill-mode: both;
+  transition: transform 0.3s ease;
+}
+
+.beneficio-card:hover {
+  transform: translateY(-10px);
+}
+
+.beneficio-icon-wrapper {
+  background: white;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.beneficio-card:hover .beneficio-icon-wrapper {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.beneficio-icon {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.beneficio-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.beneficio-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  opacity: 0.9;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .beneficios-section {
+    padding: 60px 15px;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+  }
+
+  .beneficios-grid {
+    gap: 2rem;
+  }
+
+  .beneficio-icon-wrapper {
+    width: 120px;
+    height: 120px;
+  }
+
+  .beneficio-icon {
+    width: 80px;
+    height: 80px;
+  }
+
+  .beneficio-title {
+    font-size: 1.5rem;
+  }
+
+  .beneficio-description {
+    font-size: 1rem;
+  }
+}

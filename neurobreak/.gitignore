@@ -1,0 +1,30 @@
+﻿# Dependencies
+node_modules/
+frontend/node_modules/
+backend/node_modules/
+
+# Environment
+.env
+.env.local
+frontend/.env
+backend/.env
+
+# Build
+frontend/build/
+backend/dist/
+
+# Logs
+logs/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Uploads
+backend/uploads/

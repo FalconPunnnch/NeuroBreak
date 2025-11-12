@@ -1,0 +1,69 @@
+:root {
+  --nb-header-bg: #93bdcc;
+  --nb-login-bg: #edc04e;
+  --nb-dark-blue: #1c3b4e;
+}
+
+.nb-header {
+  background-color: var(--nb-header-bg);
+}
+
+.nb-logo {
+  height: 70px;
+  object-fit: contain;
+}
+
+.nb-link {
+  color: #fff !important;
+  font-weight: 600;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.nb-link:hover {
+  color: #edc04e !important;
+}
+
+.nb-link.active::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: #edc04e;
+  border-radius: 2px;
+}
+
+.nb-btn-login {
+  background-color: var(--nb-login-bg);
+  color: #fff;
+  border: none;
+  font-weight: 700;
+  border-radius: 10px;
+  padding: 0.55rem 1.4rem;
+  transition: transform 0.18s, box-shadow 0.18s;
+}
+
+.nb-btn-login:hover {
+  background-color: #d6a632;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
+}
+
+.nb-btn-profile {
+  background-color: var(--nb-dark-blue);
+  color: white;
+  font-weight: 600;
+  border-radius: 20px;
+  padding: 0.55rem 1.6rem;
+  transition: all 0.25s ease;
+  text-decoration: none;
+}
+
+.nb-btn-profile:hover,
+.nb-btn-profile.active {
+  background-color: #2a5468;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(28, 59, 78, 0.3);
+}

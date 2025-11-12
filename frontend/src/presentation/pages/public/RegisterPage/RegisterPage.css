@@ -1,0 +1,31 @@
+.auth-page {
+  background: linear-gradient(135deg, #0d1b2a, #1c3b4e);
+  color: #fff;
+}
+
+.auth-card input.form-control {
+  border-radius: 10px;
+  padding: 10px 15px;
+}
+
+.auth-card .btn-warning {
+  border-radius: 10px;
+  font-size: 1rem;
+}
+
+.auth-card .btn-outline-light {
+  border: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.auth-card .btn-outline-light:hover {
+  background-color: #f8f9fa !important;
+}
+
+.card {
+  border-radius: 1.5rem !important;
+}
+
+.text-muted {
+  color: #6c757d !important;
+}

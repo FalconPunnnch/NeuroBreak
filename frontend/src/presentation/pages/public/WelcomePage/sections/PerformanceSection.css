@@ -1,0 +1,127 @@
+.performance-section {
+  background-color: #fff3e3;
+  padding: 80px 20px;
+}
+
+/* Animación fade */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+/* Texto */
+.performance-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #0c2d33;
+  margin-bottom: 1rem;
+}
+
+.performance-text {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* Imagen con flotación y tamaño adaptable */
+.performance-image {
+  width: clamp(180px, 30vw, 380px); /* se adapta fluidamente */
+  height: auto;
+  animation: floatAnimation 3s ease-in-out infinite;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
+  transition: transform 0.3s ease, width 0.3s ease;
+}
+
+.performance-image:hover {
+  transform: scale(1.05);
+}
+
+@keyframes floatAnimation {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+/* Botón personalizado */
+.btn-register {
+  background-color: #edc04e;
+  color: #fff;
+  padding: 0.9rem 3rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 50px;
+  box-shadow: 0 6px 15px rgba(237, 192, 78, 0.4);
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-register:hover,
+.btn-register:focus {
+  background-color: #d6a632;
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(237, 192, 78, 0.5);
+}
+
+.btn-register:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(237, 192, 78, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .performance-title {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .performance-text {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  .performance-image {
+    width: clamp(150px, 45vw, 300px);
+  }
+
+  .btn-register {
+    padding: 0.8rem 2.5rem;
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .performance-section {
+    padding: 60px 15px;
+  }
+
+  .performance-title {
+    font-size: 1.8rem;
+  }
+
+  .performance-text {
+    font-size: 0.95rem;
+  }
+
+  .performance-image {
+    width: clamp(120px, 60vw, 240px);
+  }
+
+  .btn-register {
+    width: 100%;
+    padding: 0.9rem;
+  }
+}

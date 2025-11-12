@@ -1,0 +1,42 @@
+﻿/* HU01 - Welcome Page Styles FINAL */
+
+.welcome-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+.welcome-main {
+  flex: 1;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a:focus,
+button:focus {
+  outline: 2px solid #EDC04E;
+  outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+  .welcome-page {
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,111 @@
+/* frontend/src/presentation/pages/student/ProfilePage/ProfilePage.css */
+
+/* Fondo principal */
+.profile-page {
+  background: linear-gradient(135deg, #0d1b2a, #1c3b4e);
+  color: #f8f9fa;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Tarjetas */
+.card {
+  border: none;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(6px);
+  color: #f8f9fa;
+}
+
+/* Imagen de perfil */
+.avatar {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #ffc107;
+  background: #1c3b4e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  font-size: 50px;
+  color: #adb5bd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Botones */
+.btn-warning {
+  background-color: #ffc107 !important;
+  border: none !important;
+  color: #1c1c1c !important;
+  font-weight: 600;
+}
+
+.btn-warning:hover {
+  background-color: #ffcd39 !important;
+}
+
+.btn-dark {
+  background-color: #212529 !important;
+  border: none !important;
+}
+
+.btn-dark:hover {
+  background-color: #343a40 !important;
+}
+
+/* Modal */
+.modal-content {
+  background: #1b263b;
+  color: #f8f9fa;
+  border-radius: 15px;
+}
+
+.modal-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.modal-body input,
+.modal-body textarea {
+  background-color: #0d1b2a;
+  color: #f8f9fa;
+  border: 1px solid #495057;
+}
+
+.modal-body input:focus,
+.modal-body textarea:focus {
+  border-color: #ffc107;
+  box-shadow: 0 0 5px rgba(255, 193, 7, 0.5);
+}
+
+.modal-title {
+  color: #ffc107;
+}
+
+/* Spinner */
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+}
+
+/* Ajuste general de títulos */
+h4, h5 {
+  color: #ffc107;
+}
+
+strong {
+  color: #ffffff;
+}

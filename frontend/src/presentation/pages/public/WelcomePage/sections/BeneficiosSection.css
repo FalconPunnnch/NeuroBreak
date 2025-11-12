@@ -1,0 +1,53 @@
+.beneficios-section {
+  background-color: #0c2d33;
+  color: white;
+}
+
+.section-title {
+  font-size: 2.8rem;
+  font-weight: 700;
+  animation: fadeInDown 0.8s ease-out;
+}
+
+.beneficio-card {
+  text-align: center;
+  transition: transform 0.3s ease;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.beneficio-card:hover {
+  transform: translateY(-8px);
+}
+
+.beneficio-icon-wrapper {
+  background: white;
+  border-radius: 50%;
+  width: 130px;
+  height: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.beneficio-card:hover .beneficio-icon-wrapper {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.beneficio-icon {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}

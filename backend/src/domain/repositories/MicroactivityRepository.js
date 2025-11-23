@@ -1,0 +1,198 @@
+const pool = require('../../infrastructure/database/connection');
+class MicroactivityRepository {
+  constructor(database = pool) {
+    this.db = database;
+  }
+  async findAll(filters = {}) {
+    try {
+      const { category, search, page = 1, limit = 10 } = filters;
+      const offset = (page - 1) * limit;
+      let query = 'SELECT * FROM microactivities WHERE 1=1';
+      const params = [];
+      let paramIndex = 1;
+      if (category) {
+        query += ` AND category = $${paramIndex}`;
+        params.push(category);
+        paramIndex++;
+      }
+      if (search) {
+        query += ` AND (title ILIKE $${paramIndex} OR description ILIKE $${paramIndex})`;
+        params.push(`%${search}%`);
+        paramIndex++;
+      }
+      query += ` ORDER BY created_at DESC LIMIT $${paramIndex} OFFSET $${paramIndex + 1}`;
+      params.push(limit, offset);
+      const result = await this.db.query(query, params);
+      const total = await this.getTotalCount({ category, search });
+      return {
+        data: result.rows,
+        pagination: {
+          page: parseInt(page),
+          limit: parseInt(limit),
+          total,
+          pages: Math.ceil(total / limit)
+        }
+      };
+    } catch (error) {
+      throw new Error(`Error al obtener microactividades: ${error.message}`);
+    }
+  }
+  async findById(id) {
+    try {
+      const result = await this.db.query(
+        'SELECT * FROM microactivities WHERE id = $1',
+        [id]
+      );
+      return result.rows.length > 0 ? result.rows[0] : null;
+    } catch (error) {
+      throw new Error(`Error al obtener microactividad por ID: ${error.message}`);
+    }
+  }
+  async create(data) {
+    try {
+      const {
+        title,
+        description,
+        category,
+        duration,
+        concentration_time,
+        steps,
+        image_url,
+        createdBy,
+        createdAt
+      } = data;
+      const result = await this.db.query(
+        `INSERT INTO microactivities (
+          title, description, category, duration, concentration_time, 
+          steps, image_url, created_at
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) 
+        RETURNING *`,
+        [
+          title,
+          description,
+          category,
+          duration,
+          concentration_time || null,
+          steps ? JSON.stringify(steps) : null,
+          image_url || null,
+          createdAt
+        ]
+      );
+      return result.rows[0];
+    } catch (error) {
+      throw new Error(`Error al crear microactividad: ${error.message}`);
+    }
+  }
+  async update(id, data) {
+    try {
+      const {
+        title,
+        description,
+        category,
+        duration,
+        concentration_time,
+        steps,
+        image_url
+      } = data;
+      const result = await this.db.query(
+        `UPDATE microactivities SET
+          title = COALESCE($1, title),
+          description = COALESCE($2, description),
+          category = COALESCE($3, category),
+          duration = COALESCE($4, duration),
+          concentration_time = COALESCE($5, concentration_time),
+          steps = COALESCE($6, steps),
+          image_url = COALESCE($7, image_url),
+          updated_at = CURRENT_TIMESTAMP
+        WHERE id = $8
+        RETURNING *`,
+        [
+          title,
+          description,
+          category,
+          duration,
+          concentration_time,
+          steps ? JSON.stringify(steps) : steps,
+          image_url,
+          id
+        ]
+      );
+      return result.rows[0];
+    } catch (error) {
+      throw new Error(`Error al actualizar microactividad: ${error.message}`);
+    }
+  }
+  async delete(id) {
+    try {
+      const result = await this.db.query(
+        'DELETE FROM microactivities WHERE id = $1 RETURNING id',
+        [id]
+      );
+      return result.rows.length > 0;
+    } catch (error) {
+      throw new Error(`Error al eliminar microactividad: ${error.message}`);
+    }
+  }
+  async search(searchTerm) {
+    try {
+      const result = await this.db.query(
+        `SELECT * FROM microactivities 
+         WHERE title ILIKE $1 OR description ILIKE $1 
+         ORDER BY 
+           CASE 
+             WHEN title ILIKE $1 THEN 1
+             WHEN description ILIKE $1 THEN 2
+             ELSE 3
+           END, 
+           created_at DESC`,
+        [`%${searchTerm}%`]
+      );
+      return result.rows;
+    } catch (error) {
+      throw new Error(`Error en búsqueda de microactividades: ${error.message}`);
+    }
+  }
+  async getStatistics() {
+    try {
+      const [totalResult, categoryResult, avgDurationResult] = await Promise.all([
+        this.db.query('SELECT COUNT(*) as total FROM microactivities'),
+        this.db.query(`
+          SELECT category, COUNT(*) as count 
+          FROM microactivities 
+          GROUP BY category 
+          ORDER BY count DESC
+        `),
+        this.db.query('SELECT AVG(duration) as avg_duration FROM microactivities')
+      ]);
+      return {
+        total: parseInt(totalResult.rows[0].total),
+        byCategory: categoryResult.rows,
+        averageDuration: parseFloat(avgDurationResult.rows[0].avg_duration) || 0
+      };
+    } catch (error) {
+      throw new Error(`Error al obtener estadísticas: ${error.message}`);
+    }
+  }
+  async getTotalCount(filters = {}) {
+    try {
+      const { category, search } = filters;
+      let countQuery = 'SELECT COUNT(*) as total FROM microactivities WHERE 1=1';
+      const countParams = [];
+      let countIndex = 1;
+      if (category) {
+        countQuery += ` AND category = $${countIndex}`;
+        countParams.push(category);
+        countIndex++;
+      }
+      if (search) {
+        countQuery += ` AND (title ILIKE $${countIndex} OR description ILIKE $${countIndex})`;
+        countParams.push(`%${search}%`);
+      }
+      const countResult = await this.db.query(countQuery, countParams);
+      return parseInt(countResult.rows[0].total);
+    } catch (error) {
+      throw new Error(`Error al contar microactividades: ${error.message}`);
+    }
+  }
+}
+module.exports = MicroactivityRepository;

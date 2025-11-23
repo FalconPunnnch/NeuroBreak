@@ -1,0 +1,142 @@
+.microactivity-card {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  border: 1px solid #e9ecef;
+}
+.microactivity-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+.microactivity-card:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+.microactivity-card__image-container {
+  width: 100%;
+  height: 160px;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+.microactivity-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+.microactivity-card:hover .microactivity-card__image {
+  transform: scale(1.05);
+}
+.microactivity-card__image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #93BDCC 0%, #1c3b4e 100%);
+}
+.microactivity-card__image-placeholder .microactivity-card__category-icon {
+  font-size: 3rem;
+  color: white;
+}
+.microactivity-card__content {
+  padding: 16px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.microactivity-card__title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin: 0;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.microactivity-card__metadata {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.microactivity-card__category,
+.microactivity-card__duration {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.875rem;
+  color: #718096;
+}
+.microactivity-card__category-icon,
+.microactivity-card__duration-icon {
+  font-size: 1rem;
+}
+.microactivity-card__category-text,
+.microactivity-card__duration-text {
+  font-weight: 500;
+}
+.microactivity-card__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(147, 189, 204, 0.9);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.microactivity-card:hover .microactivity-card__overlay {
+  opacity: 1;
+}
+.microactivity-card__overlay-text {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+@media (max-width: 768px) {
+  .microactivity-card {
+    border-radius: 8px;
+  }
+  .microactivity-card__image-container {
+    height: 120px;
+  }
+  .microactivity-card__content {
+    padding: 12px;
+  }
+  .microactivity-card__title {
+    font-size: 1rem;
+  }
+  .microactivity-card__image-placeholder .microactivity-card__category-icon {
+    font-size: 2.5rem;
+  }
+}
+.microactivity-card--featured {
+  border: 2px solid #EDC04E;
+}
+.microactivity-card--selected {
+  background: #f7fafc;
+  border: 2px solid #93BDCC;
+}
+.microactivity-card--disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.microactivity-card--disabled:hover {
+  transform: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}

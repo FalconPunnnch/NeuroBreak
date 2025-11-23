@@ -1,0 +1,124 @@
+.header-logged {
+  background-color: #93bdcc;
+  width: 100%;
+  padding: 0;
+  position: relative;
+}
+.header-logged::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #1c3b4e;
+}
+.header-logged-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+.header-logo img {
+  height: 80px;
+  width: auto;
+  object-fit: contain;
+}
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+.nav-link {
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s;
+  position: relative;
+  padding: 0.5rem 0;
+  font-family: 'Inter', sans-serif;
+}
+.nav-link:hover {
+  color: #edc04e;
+}
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: #edc04e;
+  border-radius: 2px;
+}
+.nav-link-button {
+  background-color: #1c3b4e;
+  color: white;
+  padding: 0.7rem 1.8rem;
+  border-radius: 20px;
+  transition: all 0.3s;
+}
+.nav-link-button:hover {
+  background-color: #2a5468;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(28, 59, 78, 0.3);
+}
+.nav-link-button.active {
+  background-color: #2a5468;
+}
+.nav-link-button.active::after {
+  display: none;
+}
+@media (max-width: 1024px) {
+  .header-nav {
+    gap: 2rem;
+  }
+  .nav-link {
+    font-size: 1rem;
+  }
+  .header-logo img {
+    height: 70px;
+  }
+}
+@media (max-width: 768px) {
+  .header-logged-container {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem 1rem;
+  }
+  .header-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .nav-link {
+    font-size: 0.95rem;
+  }
+  .header-logo img {
+    height: 60px;
+  }
+}
+@media (max-width: 480px) {
+  .header-nav {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.8rem;
+  }
+  .nav-link {
+    text-align: center;
+    width: 100%;
+  }
+  .nav-link-button {
+    width: 100%;
+    text-align: center;
+  }
+}

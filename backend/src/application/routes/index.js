@@ -1,0 +1,17 @@
+const express = require('express');
+const router = express.Router();
+const authRoutes = require('./authRoutes');
+const activityHistoryRoutes = require('./activityHistoryRoutes');
+const moodRoutes = require('./moodRoutes');
+const userRoutes = require('../../infrastructure/api/routes/user.routes');
+const microactivityRoutes = require('../../infrastructure/api/routes/microactivity.routes');
+const oauthRoutes = require('../../infrastructure/api/routes/oauth.routes');
+const infrastructureAuthRoutes = require('../../infrastructure/api/routes/auth.routes');
+router.use('/auth', authRoutes);
+router.use('/auth', infrastructureAuthRoutes);
+router.use('/oauth', oauthRoutes);
+router.use('/users', userRoutes);
+router.use('/microactivities', microactivityRoutes);
+router.use('/activity-history', activityHistoryRoutes);
+router.use('/moods', moodRoutes);
+module.exports = router;

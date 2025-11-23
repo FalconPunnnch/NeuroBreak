@@ -1,0 +1,120 @@
+.catalog-page-wrapper {
+  min-height: 100vh;
+  background: #f7fafc;
+}
+.catalog-page__header {
+  background: linear-gradient(135deg, #93BDCC 0%, #1c3b4e 100%);
+  color: white;
+  padding: 60px 0 40px;
+  text-align: center;
+}
+.catalog-page__header-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.catalog-page__title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 12px 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.catalog-page__subtitle {
+  font-size: 1.125rem;
+  opacity: 0.9;
+  margin: 0;
+  line-height: 1.6;
+  font-weight: 300;
+}
+.catalog-page {
+  padding: 40px 0;
+}
+.catalog-page__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.catalog-page__content {
+  margin-top: 20px;
+}
+.catalog-page__results-header {
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid #e9ecef;
+}
+.catalog-page__results-title {
+  font-size: 1.25rem;
+  color: #2d3748;
+  margin: 0;
+  font-weight: 600;
+}
+.catalog-page__error {
+  background: #fff5f5;
+  border: 1px solid #feb2b2;
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+  text-align: center;
+}
+.catalog-page__error-content h3 {
+  color: #c53030;
+  font-size: 1.25rem;
+  margin: 0 0 8px 0;
+  font-weight: 600;
+}
+.catalog-page__error-content p {
+  color: #742a2a;
+  margin: 0 0 16px 0;
+  line-height: 1.5;
+}
+.catalog-page__retry-btn {
+  background: #EDC04E;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.catalog-page__retry-btn:hover {
+  background: #d6a632;
+}
+@media (max-width: 768px) {
+  .catalog-page__header {
+    padding: 40px 0 30px;
+  }
+  .catalog-page__title {
+    font-size: 2rem;
+  }
+  .catalog-page__subtitle {
+    font-size: 1rem;
+  }
+  .catalog-page {
+    padding: 20px 0;
+  }
+  .catalog-page__container {
+    padding: 0 16px;
+  }
+  .catalog-page__results-header {
+    margin-bottom: 16px;
+  }
+  .catalog-page__results-title {
+    font-size: 1.125rem;
+  }
+}
+@media (max-width: 480px) {
+  .catalog-page__header {
+    padding: 30px 0 20px;
+  }
+  .catalog-page__title {
+    font-size: 1.75rem;
+  }
+  .catalog-page__subtitle {
+    font-size: 0.9rem;
+  }
+  .catalog-page__error {
+    padding: 16px;
+  }
+}

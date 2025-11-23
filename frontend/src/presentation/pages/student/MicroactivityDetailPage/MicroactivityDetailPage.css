@@ -1,0 +1,283 @@
+.microactivity-detail-page {
+  min-height: 100vh;
+  background: #f7fafc;
+  padding: 20px 0;
+}
+.microactivity-detail-page__container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.microactivity-detail-page__loading,
+.microactivity-detail-page__error,
+.microactivity-detail-page__not-found {
+  text-align: center;
+  padding: 60px 20px;
+}
+.microactivity-detail-page__spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid #e9ecef;
+  border-top: 4px solid #93BDCC;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px;
+}
+.microactivity-detail-page__error h2,
+.microactivity-detail-page__not-found h2 {
+  color: #2d3748;
+  font-size: 1.5rem;
+  margin: 0 0 12px 0;
+}
+.microactivity-detail-page__error p,
+.microactivity-detail-page__not-found p {
+  color: #718096;
+  margin: 0 0 24px 0;
+  line-height: 1.6;
+}
+.microactivity-detail-page__error-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.microactivity-detail-page__navigation {
+  margin-bottom: 32px;
+}
+.microactivity-detail-page__back-btn {
+  background: transparent;
+  border: 1px solid #e2e8f0;
+  color: #4a5568;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.microactivity-detail-page__back-btn:hover {
+  background: #f7fafc;
+  border-color: #cbd5e0;
+}
+.microactivity-detail-page__hero {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  margin-bottom: 32px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 400px;
+}
+.microactivity-detail-page__hero-image {
+  position: relative;
+  overflow: hidden;
+}
+.microactivity-detail-page__hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.microactivity-detail-page__placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #93BDCC 0%, #1c3b4e 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.microactivity-detail-page__icon {
+  font-size: 4rem;
+  color: white;
+}
+.microactivity-detail-page__hero-content {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.microactivity-detail-page__metadata {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 16px;
+}
+.microactivity-detail-page__category,
+.microactivity-detail-page__duration {
+  background: rgba(147, 189, 204, 0.1);
+  color: #1c3b4e;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.microactivity-detail-page__title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #2d3748;
+  margin: 0 0 16px 0;
+  line-height: 1.2;
+}
+.microactivity-detail-page__description {
+  color: #4a5568;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 0 0 24px 0;
+}
+.microactivity-detail-page__actions {
+  margin-top: auto;
+}
+.microactivity-detail-page__steps {
+  background: white;
+  border-radius: 12px;
+  padding: 32px;
+  margin-bottom: 32px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.microactivity-detail-page__steps-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin: 0 0 24px 0;
+}
+.microactivity-detail-page__steps-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.microactivity-detail-page__step {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+.microactivity-detail-page__step-number {
+  background: #EDC04E;
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+.microactivity-detail-page__step-content {
+  color: #4a5568;
+  line-height: 1.6;
+  font-size: 1rem;
+  padding-top: 4px;
+}
+.microactivity-detail-page__info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+.microactivity-detail-page__info-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.microactivity-detail-page__info-card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin: 0 0 16px 0;
+}
+.microactivity-detail-page__info-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.microactivity-detail-page__info-card li {
+  color: #4a5568;
+  margin-bottom: 8px;
+  padding-left: 20px;
+  position: relative;
+  line-height: 1.5;
+}
+.microactivity-detail-page__info-card li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #28a745;
+  font-weight: 600;
+}
+.btn {
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+}
+.btn--primary {
+  background: #EDC04E;
+  color: white;
+}
+.btn--primary:hover {
+  background: #d6a632;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(237, 192, 78, 0.3);
+}
+.btn--secondary {
+  background: transparent;
+  border: 2px solid #e2e8f0;
+  color: #4a5568;
+}
+.btn--secondary:hover {
+  background: #f7fafc;
+  border-color: #cbd5e0;
+}
+.btn--large {
+  padding: 16px 32px;
+  font-size: 1.1rem;
+}
+@media (max-width: 768px) {
+  .microactivity-detail-page__hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+  .microactivity-detail-page__hero-content {
+    padding: 24px;
+  }
+  .microactivity-detail-page__title {
+    font-size: 1.75rem;
+  }
+  .microactivity-detail-page__metadata {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .microactivity-detail-page__steps {
+    padding: 20px;
+  }
+  .microactivity-detail-page__info {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .microactivity-detail-page__info-card {
+    padding: 20px;
+  }
+  .microactivity-detail-page__error-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

@@ -1,0 +1,496 @@
+.emotion-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1100; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.emotion-modal__backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(123, 166, 189, 0.6) 0%,
+    rgba(156, 186, 204, 0.6) 50%,
+    rgba(189, 216, 230, 0.6) 100%
+  );
+  backdrop-filter: blur(10px);
+  animation: emotionBackdropFadeIn 0.4s ease-out;
+}
+@keyframes emotionBackdropFadeIn {
+  from { 
+    opacity: 0;
+    backdrop-filter: blur(0px);
+  }
+  to { 
+    opacity: 1;
+    backdrop-filter: blur(10px);
+  }
+}
+.emotion-modal__content {
+  position: relative;
+  background: var(--background-card, #ffffff);
+  border-radius: 24px;
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  width: 100%;
+  max-width: 580px;
+  max-height: 90vh;
+  overflow: hidden;
+  animation: emotionContentSlideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  padding: 2rem;
+}
+@keyframes emotionContentSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-40px) scale(0.9) rotateY(5deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotateY(0deg);
+  }
+}
+.emotion-modal.success .emotion-modal__content {
+  animation: emotionSuccessPulse 0.6s ease-out;
+}
+@keyframes emotionSuccessPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+.emotion-modal__success {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(34, 197, 94, 0.95);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  animation: emotionSuccessReveal 0.5s ease-out;
+  border-radius: 24px;
+}
+@keyframes emotionSuccessReveal {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.emotion-modal__success-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  animation: emotionSuccessBounce 0.8s ease-out;
+}
+@keyframes emotionSuccessBounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0) rotateZ(0deg);
+  }
+  40% {
+    transform: translateY(-20px) rotateZ(5deg);
+  }
+  60% {
+    transform: translateY(-10px) rotateZ(-3deg);
+  }
+}
+.emotion-modal__success-message {
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+  margin: 0;
+}
+.emotion-modal__header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.emotion-modal__title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary, #1f2937);
+  margin: 0 0 0.5rem 0;
+  animation: emotionTitleSlide 0.6s ease-out 0.2s both;
+}
+@keyframes emotionTitleSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.emotion-modal__subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary, #6b7280);
+  margin: 0;
+  animation: emotionSubtitleSlide 0.6s ease-out 0.3s both;
+}
+@keyframes emotionSubtitleSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.emotion-modal__body {
+  margin-bottom: 2rem;
+}
+.emotion-modal__instructions {
+  font-size: 1rem;
+  color: var(--text-secondary, #6b7280);
+  text-align: center;
+  margin: 0 0 2rem 0;
+  animation: emotionInstructionsSlide 0.6s ease-out 0.4s both;
+}
+@keyframes emotionInstructionsSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.emotion-modal__mood-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  animation: emotionGridSlide 0.8s ease-out 0.5s both;
+}
+@keyframes emotionGridSlide {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.emotion-modal__mood-option {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 1rem;
+  border: 2px solid var(--border-color, #e5e7eb);
+  border-radius: 16px;
+  background: var(--background-card, #ffffff);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 120px;
+  animation: emotionOptionFadeIn 0.6s ease-out var(--animation-delay, 0.6s) both;
+}
+.emotion-modal__mood-option:nth-child(1) { --animation-delay: 0.6s; }
+.emotion-modal__mood-option:nth-child(2) { --animation-delay: 0.7s; }
+.emotion-modal__mood-option:nth-child(3) { --animation-delay: 0.8s; }
+.emotion-modal__mood-option:nth-child(4) { --animation-delay: 0.9s; }
+.emotion-modal__mood-option:nth-child(5) { --animation-delay: 1.0s; }
+@keyframes emotionOptionFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.emotion-modal__mood-option:hover {
+  border-color: var(--primary-color, #3b82f6);
+  background: var(--primary-light, #eff6ff);
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 
+    0 12px 24px -8px rgba(59, 130, 246, 0.3),
+    0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+.emotion-modal__mood-option:focus {
+  outline: none;
+  border-color: var(--primary-color, #3b82f6);
+  box-shadow: 
+    0 0 0 3px rgba(59, 130, 246, 0.2),
+    0 4px 12px rgba(59, 130, 246, 0.15);
+}
+.emotion-modal__mood-option.selected {
+  border-color: var(--primary-color, #3b82f6);
+  background: var(--primary-color, #3b82f6);
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 
+    0 12px 24px -8px rgba(59, 130, 246, 0.4),
+    0 0 0 3px rgba(59, 130, 246, 0.2);
+  animation: emotionOptionSelected 0.4s ease-out;
+}
+@keyframes emotionOptionSelected {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1.1);
+  }
+}
+.emotion-modal__mood-option:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+.emotion-modal__mood-emoji {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  transition: transform 0.2s ease;
+}
+.emotion-modal__mood-option:hover .emotion-modal__mood-emoji {
+  transform: scale(1.2) rotateZ(5deg);
+}
+.emotion-modal__mood-option.selected .emotion-modal__mood-emoji {
+  transform: scale(1.3);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+.emotion-modal__mood-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 0.25rem;
+  transition: color 0.2s ease;
+}
+.emotion-modal__mood-shortcut {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted, #9ca3af);
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+.emotion-modal__mood-option.selected .emotion-modal__mood-shortcut {
+  background: rgba(255, 255, 255, 0.3);
+  color: white;
+}
+.emotion-modal__error {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  color: var(--error-color, #dc2626);
+  font-size: 0.875rem;
+  animation: emotionErrorSlide 0.3s ease-out;
+}
+@keyframes emotionErrorSlide {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.emotion-modal__error-icon {
+  font-size: 1.25rem;
+}
+.emotion-modal__notice {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  color: var(--primary-color, #3b82f6);
+  font-size: 0.875rem;
+  animation: emotionNoticeSlide 0.6s ease-out 1.1s both;
+}
+@keyframes emotionNoticeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.emotion-modal__notice-icon {
+  font-size: 1.25rem;
+}
+.emotion-modal__footer {
+  animation: emotionFooterSlide 0.6s ease-out 1.2s both;
+}
+@keyframes emotionFooterSlide {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.emotion-modal__submit-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  background: var(--primary-color, #3b82f6);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 3rem;
+}
+.emotion-modal__submit-button:hover:not(.disabled):not(.loading) {
+  background: var(--primary-dark, #2563eb);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+}
+.emotion-modal__submit-button:focus {
+  outline: none;
+  box-shadow: 
+    0 0 0 3px rgba(59, 130, 246, 0.3),
+    0 4px 12px rgba(59, 130, 246, 0.2);
+}
+.emotion-modal__submit-button.disabled {
+  background: var(--gray-300, #d1d5db);
+  color: var(--gray-500, #6b7280);
+  cursor: not-allowed;
+  transform: none;
+}
+.emotion-modal__submit-button.loading {
+  cursor: wait;
+  background: var(--primary-color, #3b82f6);
+}
+.emotion-modal__submit-icon {
+  font-size: 1.125rem;
+}
+.emotion-modal__submit-spinner {
+  width: 1.125rem;
+  height: 1.125rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: emotionSpinner 0.8s linear infinite;
+}
+@keyframes emotionSpinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.emotion-modal__keyboard-hints {
+  margin-top: 1.5rem;
+  text-align: center;
+  animation: emotionHintsSlide 0.6s ease-out 1.3s both;
+}
+@keyframes emotionHintsSlide {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.emotion-modal__keyboard-hints p {
+  font-size: 0.875rem;
+  color: var(--text-muted, #9ca3af);
+  margin: 0;
+}
+@media (max-width: 640px) {
+  .emotion-modal {
+    padding: 0.5rem;
+  }
+  .emotion-modal__content {
+    padding: 1.5rem;
+    border-radius: 20px;
+  }
+  .emotion-modal__mood-grid {
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 0.75rem;
+  }
+  .emotion-modal__mood-option {
+    padding: 1rem 0.5rem;
+    min-height: 100px;
+  }
+  .emotion-modal__mood-emoji {
+    font-size: 2rem;
+  }
+  .emotion-modal__title {
+    font-size: 1.5rem;
+  }
+  .emotion-modal__subtitle {
+    font-size: 1rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .emotion-modal__content,
+  .emotion-modal__mood-option,
+  .emotion-modal__title,
+  .emotion-modal__subtitle,
+  .emotion-modal__instructions,
+  .emotion-modal__mood-grid,
+  .emotion-modal__footer,
+  .emotion-modal__keyboard-hints,
+  .emotion-modal__notice,
+  .emotion-modal__error {
+    animation: none;
+  }
+  .emotion-modal__mood-option:hover {
+    transform: none;
+  }
+}
+@media (prefers-contrast: high) {
+  .emotion-modal__mood-option {
+    border-width: 3px;
+  }
+  .emotion-modal__mood-option.selected {
+    border-color: #000;
+    background: #000;
+  }
+}

@@ -23,7 +23,7 @@ class TimerAudio {
   }
   async playEndSound(options = {}) {
     const {
-      volume = 0.6,
+      volume = 0.5,
       duration = 1.5,
       frequency = 523.25, // C5
       type = 'auto' // 'auto', 'file', 'synthetic', 'embedded'

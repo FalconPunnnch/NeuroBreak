@@ -1,10 +1,6 @@
-// HU01 - Hero Carousel Section FINAL
-// Ubicación: frontend/src/presentation/pages/public/WelcomePage/sections/HeroCarousel.jsx
-
 import React, { useState } from "react";
 import { Carousel } from "react-bootstrap";
 import "./HeroCarousel.css";
-
 const HeroCarousel = () => {
   const slides = [
     {
@@ -23,13 +19,10 @@ const HeroCarousel = () => {
       text: "Optimiza tu tiempo con pausas estratégicas que mejoran tu rendimiento"
     }
   ];
-
   const [activeIndex, setActiveIndex] = useState(0);
-
   const handleSelect = (selectedIndex) => {
     setActiveIndex(selectedIndex);
   };
-
   return (
     <section className="hero-section">
       <div className="hero-carousel-wrapper">
@@ -40,6 +33,7 @@ const HeroCarousel = () => {
           controls={true}
           interval={5000}
           pause="hover"
+          fade
         >
           {slides.map((slide) => (
             <Carousel.Item key={slide.id}>
@@ -52,7 +46,6 @@ const HeroCarousel = () => {
             </Carousel.Item>
           ))}
         </Carousel>
-
         <div className="custom-indicators">
           {slides.map((_, index) => (
             <button
@@ -68,5 +61,4 @@ const HeroCarousel = () => {
     </section>
   );
 };
-
 export default HeroCarousel;

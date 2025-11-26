@@ -1,50 +1,61 @@
-﻿// Context de Autenticación - Patrón Observer
 import React, { createContext, useState, useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import AuthService from '../../core/services/AuthService';
-
+import { roleStrategyFactory } from '../../patterns/roles/RoleStrategyFactory';
 const AuthContext = createContext();
-
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-
   useEffect(() => {
     checkAuth();
   }, []);
-
   const checkAuth = async () => {
     const token = localStorage.getItem('token');
     const userData = localStorage.getItem('user');
-    
     if (token && userData) {
-      setUser(JSON.parse(userData));
-      setIsAuthenticated(true);
+      try {
+        const parsedUser = JSON.parse(userData);
+        setUser(parsedUser);
+        setIsAuthenticated(true);
+      } catch (error) {
+        console.error('Error parsing user data:', error);
+        await logout();
+      }
     }
-    
     setLoading(false);
   };
-
   const login = async (email, password) => {
     try {
       const result = await AuthService.loginWithEmail(email, password);
       if (result.success) {
         setUser(result.user);
         setIsAuthenticated(true);
-        return { success: true };
+        const redirectionData = roleStrategyFactory.getRedirectionData(result.user);
+        return {
+          success: true,
+          user: result.user,
+          redirectTo: redirectionData.path,
+          message: redirectionData.message,
+          type: redirectionData.type
+        };
       }
-      return { success: false, error: result.error };
+      return { 
+        success: false, 
+        error: result.error 
+      };
     } catch (error) {
-      return { success: false, error: error.message };
+      return { 
+        success: false, 
+        error: error.message || 'Error inesperado durante el login' 
+      };
     }
   };
-
   const logout = async () => {
     await AuthService.logout();
     setUser(null);
     setIsAuthenticated(false);
   };
-
   const register = async (userData) => {
     try {
       const result = await AuthService.register(userData);
@@ -53,7 +64,6 @@ export const AuthProvider = ({ children }) => {
       return { success: false, error: error.message };
     }
   };
-
   const value = {
     user,
     isAuthenticated,
@@ -62,10 +72,8 @@ export const AuthProvider = ({ children }) => {
     logout,
     register
   };
-
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
-
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
@@ -73,5 +81,4 @@ export const useAuth = () => {
   }
   return context;
 };
-
 export default AuthContext;

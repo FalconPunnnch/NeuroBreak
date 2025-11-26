@@ -1,4 +1,3 @@
-﻿// Servicio de LocalStorage - Patrón Singleton
 class LocalStorageService {
   constructor() {
     if (LocalStorageService.instance) {
@@ -6,7 +5,6 @@ class LocalStorageService {
     }
     LocalStorageService.instance = this;
   }
-
   setItem(key, value) {
     try {
       const serializedValue = JSON.stringify(value);
@@ -15,7 +13,6 @@ class LocalStorageService {
       console.error('Error saving to localStorage:', error);
     }
   }
-
   getItem(key) {
     try {
       const item = localStorage.getItem(key);
@@ -25,17 +22,13 @@ class LocalStorageService {
       return null;
     }
   }
-
   removeItem(key) {
     localStorage.removeItem(key);
   }
-
   clear() {
     localStorage.clear();
   }
 }
-
 const localStorageService = new LocalStorageService();
 Object.freeze(localStorageService);
-
 export default localStorageService;

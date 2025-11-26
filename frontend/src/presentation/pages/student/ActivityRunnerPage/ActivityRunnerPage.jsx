@@ -8,6 +8,7 @@ import ActivityService from '../../../../core/services/ActivityService';
 import Header from '../../../components/layout/Header/Header';
 import Footer from '../../../components/layout/Footer/Footer';
 import './ActivityRunnerPage.css';
+
 function ActivityRunnerPage() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -281,7 +282,7 @@ function ActivityRunnerPage() {
               {activity?.concentrationTime && (
                 <div className="activity-runner-page__detail-item">
                   <i className="fas fa-brain"></i>
-                  <span>Tiempo de concentración: {activity.concentrationTime} min</span>
+                  <span>Tiempo de concentración sugerido: {activity.concentrationTime} min</span>
                 </div>
               )}
               {activity?.sessionConfig?.showBreathing && (

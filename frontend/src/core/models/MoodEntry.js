@@ -1,4 +1,3 @@
-﻿// Modelo de dominio: Registro de Estado de Ánimo
 export class MoodEntry {
   constructor({
     id = null,
@@ -16,5 +15,4 @@ export class MoodEntry {
     this.timestamp = timestamp;
   }
 }
-
 export default MoodEntry;

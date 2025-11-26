@@ -1,4 +1,3 @@
-﻿// Modelo de dominio: Microactividad
 export class Microactivity {
   constructor({
     id = null,
@@ -23,11 +22,9 @@ export class Microactivity {
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
   }
-
   getDurationInMinutes() {
-    return Math.floor(this.duration / 60);
+    return Math.floor(this.duration);  // Ya viene en minutos
   }
-
   getCategoryIcon() {
     const icons = {
       'Mente': '',
@@ -37,5 +34,4 @@ export class Microactivity {
     return icons[this.category] || '';
   }
 }
-
 export default Microactivity;

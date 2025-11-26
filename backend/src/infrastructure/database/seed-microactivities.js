@@ -5,8 +5,8 @@ const sampleMicroactivities = [
     title: 'Respiración Profunda',
     description: 'Ejercicio de respiración para reducir el estrés y mejorar la concentración. Inhala profundamente, mantén y exhala lentamente.',
     category: 'Mente',
-    duration: 1, // 1 minuto
-    concentration_time: 3, // 3 minutos
+    duration: 5, // minutos
+    concentration_time: 10, // minutos
     steps: JSON.stringify([
       'Siéntate cómodamente con la espalda recta',
       'Inhala lentamente por la nariz durante 4 segundos',
@@ -19,8 +19,8 @@ const sampleMicroactivities = [
     title: 'Dibujo Creativo',
     description: 'Actividad de dibujo libre para estimular la creatividad y relajar la mente.',
     category: 'Creatividad',
-    duration: 1, // 1 minuto
-    concentration_time: 10, // 10 minutos
+    duration: 15, // minutos
+    concentration_time: 15, // minutos
     steps: JSON.stringify([
       'Prepara papel y materiales de dibujo',
       'Elige un tema libre o abstracto',
@@ -33,8 +33,8 @@ const sampleMicroactivities = [
     title: 'Estiramiento Básico',
     description: 'Serie de estiramientos suaves para aliviar la tensión muscular y mejorar la flexibilidad.',
     category: 'Cuerpo',
-    duration: 1, // 1 minuto
-    concentration_time: 5, // 5 minutos
+    duration: 5, // minuto
+    concentration_time: 25, // minutos
     steps: JSON.stringify([
       'Estira el cuello hacia los lados',
       'Rota los hombros hacia atrás y adelante',
@@ -47,8 +47,8 @@ const sampleMicroactivities = [
     title: 'Meditación Mindfulness',
     description: 'Práctica de atención plena para mejorar la concentración y reducir la ansiedad.',
     category: 'Mente',
-    duration: 1, // 1 minuto
-    concentration_time: 10, // 10 minutos
+    duration: 8, // 1 minuto
+    concentration_time: 60, // 10 minutos
     steps: JSON.stringify([
       'Encuentra un lugar tranquilo',
       'Siéntate en posición cómoda',
@@ -61,8 +61,8 @@ const sampleMicroactivities = [
     title: 'Escritura Creativa',
     description: 'Ejercicio de escritura libre para expresar ideas y emociones de manera creativa.',
     category: 'Creatividad',
-    duration: 1, // 1 minuto
-    concentration_time: 15, // 15 minutos
+    duration: 10, // minutos
+    concentration_time: 15, // minutos
     steps: JSON.stringify([
       'Prepara papel y bolígrafo',
       'Elige un tema o palabra inspiradora',
@@ -72,25 +72,25 @@ const sampleMicroactivities = [
     ])
   },
   {
-    title: 'Caminata Activa',
-    description: 'Caminata corta para activar el cuerpo y mejorar la circulación.',
+    title: 'Movilidad Energética',
+    description: 'Secuencia corta de movimientos dinámicos para activar articulaciones y elevar ligeramente el pulso.',
     category: 'Cuerpo',
-    duration: 1, // 1 minuto
-    concentration_time: 5, // 5 minutos
+    duration: 5, // minutos
+    concentration_time: 25, // minutos
     steps: JSON.stringify([
-      'Sal al aire libre o camina en interiores',
-      'Mantén un ritmo constante',
-      'Respira profundamente',
-      'Observa tu entorno',
-      'Disfruta del movimiento'
+      'Ponte de pie con postura recta',
+      'Realiza círculos lentos de hombros hacia atrás y hacia adelante',
+      'Eleva rodillas alternadas durante 20 segundos',
+      'Haz giros suaves de torso a ambos lados',
+      'Respira profundo y finaliza con estiramiento de brazos'
     ])
   },
   {
     title: 'Visualización Positiva',
     description: 'Técnica de visualización para mejorar el estado de ánimo y la motivación.',
     category: 'Mente',
-    duration: 1, // 1 minuto
-    concentration_time: 7, // 7 minutos
+    duration: 5, // minutos
+    concentration_time: 30, // minutos
     steps: JSON.stringify([
       'Siéntate cómodamente',
       'Cierra los ojos',
@@ -100,11 +100,11 @@ const sampleMicroactivities = [
     ])
   },
   {
-    title: 'Collage Digital',
+    title: 'Collage Digital Express',
     description: 'Creación de un collage usando imágenes digitales para expresar creatividad.',
     category: 'Creatividad',
-    duration: 1, // 1 minuto
-    concentration_time: 20, // 20 minutos
+    duration: 10, // minutos
+    concentration_time: 20, // minutos
     steps: JSON.stringify([
       'Abre una aplicación de edición de imágenes',
       'Recopila imágenes que te inspiren',
@@ -114,17 +114,102 @@ const sampleMicroactivities = [
     ])
   },
   {
-    title: 'Ejercicios de Fuerza',
-    description: 'Rutina básica de ejercicios de fuerza usando el peso corporal.',
+    title: 'Ejercicios de Fuerza y Resistencia',
+    description: 'Rutina básica de ejercicios de fuerza y resistencia usando el peso corporal.',
     category: 'Cuerpo',
-    duration: 1, // 1 minuto
-    concentration_time: 10, // 10 minutos
+    duration: 20, // minutos
+    concentration_time: 90, // minutos
     steps: JSON.stringify([
-      'Realiza 10 flexiones',
+      'Realiza 10 flexiones — recuerda mantener los codos cerca a tu cuerpo',
+      'Descansa 30 segundos',
       'Haz 15 sentadillas',
-      'Mantén plancha por 30 segundos',
+      'Descansa 30 segundos',
+      'Mantén posición de plancha por 30 segundos',
       'Repite el circuito 3 veces',
-      'Estira al finalizar'
+      'Haz estiramientos suaves al finalizar'
+    ])
+  },
+  {
+    title: 'Organización Rápida',
+    description: 'Pequeña sesión para ordenar tu espacio de trabajo y promover claridad mental.',
+    category: 'Mente',
+    duration: 5, // minutos
+    concentration_time: 10, // minutos
+    steps: JSON.stringify([
+      'Identifica los objetos fuera de lugar',
+      'Guarda o apila lo esencial',
+      'Limpia rápidamente tu superficie principal',
+      'Organiza cables o accesorios visibles',
+      'Respira profundo y observa la diferencia'
+    ])
+  },
+  {
+    title: 'Impro Musical',
+    description: 'Pequeña improvisación musical para relajar la mente y expresar emociones.',
+    category: 'Creatividad',
+    duration: 10, // minutos
+    concentration_time: 15, // minutos
+    steps: JSON.stringify([
+      'Abre una app o instrumento simple (piano virtual, ocarina, etc.)',
+      'Elige un ritmo o melodía base',
+      'Improvisa sonidos sin buscar perfección',
+      'Explora diferentes intensidades',
+      'Escucha lo que creaste por unos segundos'
+    ])
+  },
+  {
+    title: 'Movilidad Suave',
+    description: 'Secuencia ligera para liberar tensión articular y mejorar el flujo corporal.',
+    category: 'Cuerpo',
+    duration: 5, // minutos
+    concentration_time: 10, // minutos
+    steps: JSON.stringify([
+      'Rota lentamente cuello y hombros',
+      'Haz círculos con brazos',
+      'Rota la cadera suavemente',
+      'Flexiona rodillas y tobillos',
+      'Respira profundo para terminar'
+    ])
+  },
+  {
+    title: 'Escritura de Gratitud Express',
+    description: 'Actividad corta para mejorar el estado emocional enfocándote en cosas positivas de tu día.',
+    category: 'Mente',
+    duration: 3, // minutos
+    concentration_time: 10, // minutos
+    steps: JSON.stringify([
+      'Toma papel o abre una nota en tu dispositivo',
+      'Escribe 3 cosas por las que te sientes agradecida hoy',
+      'Añade una frase positiva para ti misma',
+      'Lee todo en voz baja',
+      'Respira profundo y cierra la nota'
+    ])
+  },
+  {
+    title: 'Mini Fotografía Creativa',
+    description: 'Ejercicio rápido para entrenar el ojo creativo tomando una foto con intención artística.',
+    category: 'Creatividad',
+    duration: 5, // minutos
+    concentration_time: 12, // minutos
+    steps: JSON.stringify([
+      'Toma tu teléfono o cámara',
+      'Busca un objeto, textura o luz interesante',
+      'Enfoca desde distintos ángulos',
+      'Toma una foto que represente una emoción',
+      'Observa tu foto final y nómbrala mentalmente'
+    ])
+  },
+  {
+    title: 'Auto-Masaje Relajante',
+    description: 'Técnica breve de automasaje para liberar tensión acumulada en cuello y hombros.',
+    category: 'Cuerpo',
+    duration: 5, // minutos
+    concentration_time: 30, // minutos
+    steps: JSON.stringify([
+      'Siéntate con espalda recta',
+      'Con las yemas de los dedos masajea suavemente la base del cuello, bajo la nuca',
+      'Realiza movimientos circulares en las sienes por 20–30 segundos',
+      'Respira profundo para finalizar'
     ])
   }
 ];

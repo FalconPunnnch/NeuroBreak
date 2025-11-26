@@ -111,7 +111,7 @@ function EndModal({
       
       // Reproducir sonido de celebración
       playEndSound({ 
-        volume: 0.6,
+        volume: 0.3,
         type: 'embedded' // Usar sonido embebido para mayor compatibilidad
       }).then(success => {
         if (!success) {
@@ -223,10 +223,15 @@ function EndModal({
             id="end-modal-description"
             className="end-modal__description"
           >
-            {nextMicroactivity 
-              ? "Tu sesión de concentración ha terminado. ¿Te gustaría continuar con la microactividad sugerida o tomar un descanso?"
-              : "Tu sesión de concentración ha terminado exitosamente. ¡Excelente trabajo!"
-            }
+            {nextMicroactivity ? (
+            <>
+            Tu sesión de concentración ha terminado exitosamente.
+            <br />
+            ¡Excelente trabajo!
+            </>
+            ) : (
+            "Tu sesión de concentración ha terminado exitosamente. ¡Excelente trabajo!"
+            )}
           </p>
           {}
           {nextMicroactivity && (
@@ -273,7 +278,7 @@ function EndModal({
                 disabled={isLaunching}
               >
                 <span className="end-modal__button-icon">☕</span>
-                Tomar Descanso
+                Nueva Concentración
               </button>
               <button
                 ref={primaryButtonRef}

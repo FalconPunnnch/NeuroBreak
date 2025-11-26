@@ -1,52 +1,205 @@
-ï»¿// Servicio de Microactividades
 import { MicroactivityRepository } from '../repositories/MicroactivityRepository';
-
+import { CATEGORIES } from '../../config/constants';
 export class MicroactivityService {
-  constructor() {
-    this.repository = new MicroactivityRepository();
+  constructor(repositoryInstance = null) {
+    this.repository = repositoryInstance || new MicroactivityRepository();
   }
-
   async getAllMicroactivities(filters = {}) {
-    // TODO: Implementar obtenciÃ³n con filtros
-    return this.repository.findAll(filters);
+    try {
+      const result = await this.repository.findAll(filters);
+      return this.transformMicroactivitiesList(result);
+    } catch (error) {
+      throw this.handleServiceError(error, 'Error al obtener microactividades');
+    }
   }
-
   async getMicroactivityById(id) {
-    return this.repository.findById(id);
+    try {
+      const result = await this.repository.findById(id);
+      const microactivity = result.data || result;
+      return this.transformMicroactivity(microactivity);
+    } catch (error) {
+      throw this.handleServiceError(error, 'Error al obtener microactividad');
+    }
   }
-
   async getByCategory(category) {
-    return this.repository.findByCategory(category);
+    try {
+      const result = await this.repository.findByCategory(category);
+      return result.data?.map(item => this.transformMicroactivity(item)) || [];
+    } catch (error) {
+      throw this.handleServiceError(error, 'Error al obtener por categoría');
+    }
   }
-
   async searchMicroactivities(searchTerm) {
-    return this.repository.search(searchTerm);
+    try {
+      const result = await this.repository.search(searchTerm);
+      return result.data?.map(item => this.transformMicroactivity(item)) || [];
+    } catch (error) {
+      throw this.handleServiceError(error, 'Error en búsqueda');
+    }
   }
-
   async getFavorites(userId) {
-    return this.repository.findFavoritesByUser(userId);
+    try {
+      const result = await this.repository.findFavoritesByUser(userId);
+      return result.data?.map(item => this.transformMicroactivity(item)) || [];
+    } catch (error) {
+      throw this.handleServiceError(error, 'Error al obtener favoritos');
+    }
   }
-
   async addToFavorites(userId, microactivityId) {
-    return this.repository.addFavorite(userId, microactivityId);
+    try {
+      return await this.repository.addFavorite(userId, microactivityId);
+    } catch (error) {
+      throw this.handleServiceError(error, 'Error al agregar a favoritos');
+    }
   }
-
   async removeFromFavorites(userId, microactivityId) {
-    return this.repository.removeFavorite(userId, microactivityId);
+    try {
+      return await this.repository.removeFavorite(userId, microactivityId);
+    } catch (error) {
+      throw this.handleServiceError(error, 'Error al remover de favoritos');
+    }
   }
-
-  // Admin methods
   async createMicroactivity(data) {
-    return this.repository.create(data);
+    try {
+      const processedData = this.preprocessCreateData(data);
+      const result = await this.repository.create(processedData);
+      return this.transformMicroactivity(result);
+    } catch (error) {
+      throw this.handleServiceError(error, 'Error al crear microactividad');
+    }
   }
-
   async updateMicroactivity(id, data) {
-    return this.repository.update(id, data);
+    try {
+      const processedData = this.preprocessUpdateData(data);
+      const result = await this.repository.update(id, processedData);
+      return this.transformMicroactivity(result);
+    } catch (error) {
+      throw this.handleServiceError(error, 'Error al actualizar microactividad');
+    }
   }
-
   async deleteMicroactivity(id) {
-    return this.repository.delete(id);
+    try {
+      await this.repository.delete(id);
+      return true;
+    } catch (error) {
+      throw this.handleServiceError(error, 'Error al eliminar microactividad');
+    }
+  }
+  async getStatistics() {
+    try {
+      const result = await this.repository.getStats();
+      return this.processResponse(result, 'Estadísticas obtenidas');
+    } catch (error) {
+      this.logError('getStatistics', error);
+      throw this.createError('Error al obtener estadísticas', error);
+    }
+  }
+  transformMicroactivitiesList(result) {
+    return {
+      ...result,
+      data: result.data?.map(item => this.transformMicroactivity(item)) || []
+    };
+  }
+  transformMicroactivity(microactivity) {
+    if (!microactivity) return null;
+    return {
+      ...microactivity,
+      imageUrl: microactivity.image_url || this.getDefaultImage(microactivity.category),
+      createdAt: microactivity.created_at,
+      updatedAt: microactivity.updated_at,
+      concentrationTime: microactivity.concentration_time,
+      steps: this.parseSteps(microactivity.steps),
+      duration: microactivity.duration, // Mantener en minutos para mostrar
+      estimatedDuration: microactivity.duration * 60, // Convertir a segundos para el timer
+      durationFormatted: this.formatDuration(microactivity.duration),
+      concentrationTimeFormatted: this.formatDuration(microactivity.concentration_time),
+      categoryFormatted: this.formatCategory(microactivity.category)
+    };
+  }
+  preprocessCreateData(data) {
+    return {
+      ...data,
+      title: data.title?.trim(),
+      description: data.description?.trim(),
+      category: data.category, 
+      duration: parseInt(data.duration),
+      concentration_time: data.concentration_time ? parseInt(data.concentration_time) : null,
+      steps: Array.isArray(data.steps) ? data.steps : []
+    };
+  }
+  preprocessUpdateData(data) {
+    const processed = {};
+    if (data.title) processed.title = data.title.trim();
+    if (data.description) processed.description = data.description.trim();
+    if (data.category) processed.category = data.category; 
+    if (data.duration) processed.duration = parseInt(data.duration);
+    if (data.concentration_time !== undefined) {
+      processed.concentration_time = data.concentration_time ? parseInt(data.concentration_time) : null;
+    }
+    if (data.steps !== undefined) {
+      processed.steps = Array.isArray(data.steps) ? data.steps : [];
+    }
+    return processed;
+  }
+  parseSteps(steps) {
+    if (Array.isArray(steps)) return steps;
+    if (typeof steps === 'string') {
+      try { return JSON.parse(steps); } catch { return []; }
+    }
+    return [];
+  }
+  formatDuration(duration) {
+    if (!duration) return '0 min';
+    const minutes = Math.floor(duration);
+    const decimalPart = duration % 1;
+    if (minutes >= 1) {
+      if (decimalPart > 0) {
+        return `${minutes}.${Math.floor(decimalPart * 60 / 10)} min`;
+      } else {
+        return `${minutes} min`;
+      }
+    } else {
+      return 'Menos de 1 min';
+    }
+  }
+  formatCategory(category) {
+    const categoryMap = {
+      [CATEGORIES.MIND]: CATEGORIES.MIND,
+      [CATEGORIES.CREATIVITY]: CATEGORIES.CREATIVITY,
+      [CATEGORIES.BODY]: CATEGORIES.BODY
+    };
+    return categoryMap[category] || category || 'Sin categoría';
+  }
+  getDefaultImage(category) {
+    const imageMap = {
+      [CATEGORIES.MIND]: '/assets/images/default-focus.jpg',
+      [CATEGORIES.CREATIVITY]: '/assets/images/default-creativity.jpg',
+      [CATEGORIES.BODY]: '/assets/images/default-movement.jpg'
+    };
+    return imageMap[category] || '/assets/images/default-microactivity.jpg';
+  }
+  handleServiceError(error, defaultMessage) {
+    if (error.message) return error;
+    console.error(defaultMessage, error);
+    return new Error(defaultMessage);
+  }
+  processResponse(result, message) {
+    return {
+      success: true,
+      message: message || 'Operación exitosa',
+      data: result.data || result
+    };
+  }
+  logError(method, error) {
+    console.error(`Error en MicroactivityService.${method}:`, error);
+  }
+  createError(message, originalError) {
+    const error = new Error(message);
+    if (originalError) {
+      error.originalError = originalError;
+      error.stack = originalError.stack;
+    }
+    return error;
   }
 }
-
 export default MicroactivityService;

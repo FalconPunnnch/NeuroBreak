@@ -1,4 +1,3 @@
-﻿// Configuración de autenticación OAuth
 export const AUTH_CONFIG = {
   GOOGLE: {
     CLIENT_ID: process.env.REACT_APP_GOOGLE_CLIENT_ID,
@@ -13,5 +12,4 @@ export const AUTH_CONFIG = {
     REDIRECT_URI: window.location.origin + '/auth/apple/callback'
   }
 };
-
 export default AUTH_CONFIG;

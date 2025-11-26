@@ -1,65 +1,88 @@
-﻿// Servicio de Autenticación - Patrón Strategy
-import { UserRepository } from '../repositories/UserRepository';
-
+import apiClient from '../../infrastructure/api/apiClient';
 export class AuthService {
   constructor() {
-    this.userRepository = new UserRepository();
     this.currentUser = null;
   }
-
-  // Strategy: Email/Password
   async loginWithEmail(email, password) {
-    // TODO: Implementar lógica de autenticación
-    console.log('Login with email:', email);
-    return this.userRepository.authenticate(email, password);
+    try {
+      const response = await apiClient.post('/auth/login', {
+        email,
+        password
+      });
+      if (response.data && response.data.token) {
+        const { token, user } = response.data;
+        localStorage.setItem('token', token);
+        localStorage.setItem('user', JSON.stringify(user));
+        this.currentUser = user;
+        return {
+          success: true,
+          token,
+          user: {
+            id: user.id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            rol: user.role || user.rol || 'user' // Usar role del backend
+          }
+        };
+      }
+      return {
+        success: false,
+        error: 'Credenciales inv�lidas'
+      };
+    } catch (error) {
+      return {
+        success: false,
+        error: error.response?.data?.message || 'Error de conexi�n'
+      };
+    }
   }
-
-  // Strategy: Google OAuth
   async loginWithGoogle(googleToken) {
-    // TODO: Implementar autenticación con Google
     console.log('Login with Google');
     return this.userRepository.authenticateWithGoogle(googleToken);
   }
-
-  // Strategy: Microsoft OAuth
   async loginWithMicrosoft(microsoftToken) {
-    // TODO: Implementar autenticación con Microsoft
     console.log('Login with Microsoft');
     return this.userRepository.authenticateWithMicrosoft(microsoftToken);
   }
-
-  // Strategy: Apple OAuth
   async loginWithApple(appleToken) {
-    // TODO: Implementar autenticación con Apple
     console.log('Login with Apple');
     return this.userRepository.authenticateWithApple(appleToken);
   }
-
   async register(userData) {
-    // TODO: Implementar registro
     return this.userRepository.create(userData);
   }
-
   async logout() {
-    // TODO: Implementar logout
+    try {
+      await apiClient.post('/auth/logout');
+    } catch (error) {
+      console.warn('Error al cerrar sesi�n en el servidor:', error);
+    }
     this.currentUser = null;
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
   }
-
-  async forgotPassword(email) {
-    // TODO: Implementar recuperación de contraseña
-    return this.userRepository.requestPasswordReset(email);
-  }
-
   getCurrentUser() {
+    if (!this.currentUser) {
+      const userData = localStorage.getItem('user');
+      if (userData) {
+        try {
+          this.currentUser = JSON.parse(userData);
+        } catch (error) {
+          console.error('Error parsing user data:', error);
+          localStorage.removeItem('user');
+        }
+      }
+    }
     return this.currentUser;
   }
-
   isAuthenticated() {
-    return !!localStorage.getItem('token');
+    return !!localStorage.getItem('token') && !!this.getCurrentUser();
+  }
+  getUserRole() {
+    const user = this.getCurrentUser();
+    return user?.rol || user?.role || 'user';
   }
 }
-
-// Singleton
 const authService = new AuthService();
 export default authService;

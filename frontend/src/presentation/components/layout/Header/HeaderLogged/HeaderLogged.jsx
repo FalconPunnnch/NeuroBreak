@@ -2,35 +2,30 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './HeaderLogged.css';
 import logo from '../../../../../assets/images/NeuroBreak.png';
+
 const HeaderLogged = () => {
   const location = useLocation();
-  const isActive = (path) => {
-    return location.pathname === path;
-  };
+  const isActive = (path) => location.pathname === path;
+
   return (
     <header className="header-logged">
       <div className="header-logged-container">
-        {}
-        <Link to="/catalog" className="header-logo">
+
+        <Link to="/" className="header-logo me-2">
           <img src={logo} alt="NeuroBreak" />
         </Link>
-        {}
-        <nav className="header-nav">
+
+        <nav className="header-nav gap-4">
           <Link 
-            to="/catalog" 
+            to="/catalog"
             className={`nav-link ${isActive('/catalog') ? 'active' : ''}`}
           >
             Catálogo de Actividades
           </Link>
-          <Link 
-            to="/statistics" 
-            className={`nav-link ${isActive('/statistics') ? 'active' : ''}`}
-          >
-            Mis Estadísticas
-          </Link>
-          <Link 
-            to="/profile" 
-            className={`nav-link nav-link-button ${isActive('/profile') ? 'active' : ''}`}
+
+          <Link
+            to="/profile"
+            className={`nav-link nav-link-button`}
           >
             Mi perfil
           </Link>
@@ -39,4 +34,5 @@ const HeaderLogged = () => {
     </header>
   );
 };
+
 export default HeaderLogged;

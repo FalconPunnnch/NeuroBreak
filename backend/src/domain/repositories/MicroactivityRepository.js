@@ -5,7 +5,11 @@ class MicroactivityRepository {
   }
   async findAll(filters = {}) {
     try {
-      const { category, search, page = 1, limit = 10 } = filters;
+      // Nota: aumentamos el límite por defecto de 10 a 1000 para que el catálogo
+      // reciba todas las microactividades del seed cuando no se indiquen filtros
+      // de paginación desde el frontend. Para un sistema en producción conviene
+      // implementar paginación real en la UI.
+      const { category, search, page = 1, limit = 1000 } = filters;
       const offset = (page - 1) * limit;
       let query = 'SELECT * FROM microactivities WHERE 1=1';
       const params = [];

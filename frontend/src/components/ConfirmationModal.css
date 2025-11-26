@@ -26,11 +26,7 @@
 }
 .confirmation-modal__content {
   position: relative;
-  background: var(--background-card, #ffffff);
   border-radius: 16px;
-  box-shadow: 
-    0 25px 50px -12px rgba(0, 0, 0, 0.25),
-    0 0 0 1px rgba(0, 0, 0, 0.05);
   width: 100%;
   max-width: 480px;
   max-height: 90vh;
@@ -58,7 +54,7 @@
   margin: 0;
   font-size: 1.25rem;
   font-weight: 700;
-  color: var(--text-primary, #111827);
+  color: var(--text-primary, #1484ad);
   line-height: 1.4;
   flex: 1;
 }
@@ -83,9 +79,9 @@
   color: var(--text-primary, #111827);
 }
 .confirmation-modal__close:focus-visible {
-  outline: 2px solid var(--accent-color, #3b82f6);
+  outline: 2px solid var(--accent-color, #1484ad);
   outline-offset: 2px;
-  border-color: var(--accent-color, #3b82f6);
+  border-color: var(--accent-color, #1484ad);
 }
 .confirmation-modal__close:disabled {
   opacity: 0.5;
@@ -97,7 +93,7 @@
   max-height: 60vh;
 }
 .confirmation-modal__timer-info {
-  background: var(--background-accent, #f0f9ff);
+  background: #f0f9ff;
   border: 1px solid var(--border-accent, #bae6fd);
   border-radius: 12px;
   padding: 1rem;
@@ -120,13 +116,13 @@
 }
 .confirmation-modal__timer-text,
 .confirmation-modal__microactivity-text {
-  color: var(--text-primary, #111827);
+  color: #cfd4dd;
 }
 .confirmation-modal__description {
   margin: 0 0 1.5rem;
   font-size: 0.875rem;
   line-height: 1.6;
-  color: var(--text-secondary, #6b7280);
+  color: var(--text-secondary, #9ca0a9);
 }
 .confirmation-modal__headphones {
   border: 2px solid var(--border-accent, #bae6fd);
@@ -184,15 +180,15 @@
 }
 .confirmation-modal__headphones-text {
   font-size: 0.875rem;
-  color: var(--text-primary, #111827);
+  color: #cfd4dd;
   line-height: 1.5;
   flex: 1;
 }
 .confirmation-modal__headphones-description {
-  margin: 0.75rem 0 0;
-  font-size: 0.75rem;
+  margin: 0.6rem 0 0;
+  font-size: 0.88rem;
   line-height: 1.5;
-  color: var(--text-secondary, #6b7280);
+  color: #cfd4dd;
   padding-left: 1.75rem;
 }
 .confirmation-modal__warning {
@@ -211,7 +207,7 @@
 }
 .confirmation-modal__warning-text {
   font-size: 0.875rem;
-  color: var(--error-color, #dc2626);
+  color: #b01f1f;
   font-weight: 500;
 }
 .confirmation-modal__footer {

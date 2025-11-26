@@ -6,7 +6,7 @@
 }
 .student-sidebar {
   width: 280px;
-  background: linear-gradient(180deg, #1e3a8a 0%, #1e40af 100%);
+  background-color: #83b9cd;
   color: white;
   display: flex;
   flex-direction: column;
@@ -59,7 +59,7 @@
   background: rgba(255, 255, 255, 0.15);
   color: white;
   font-weight: 500;
-  border-right: 3px solid #60a5fa;
+  border-right: 3px solid #1484ad;
 }
 .nav-item i {
   font-size: 1.1rem;
@@ -68,12 +68,13 @@
 }
 .logout-btn {
   margin-top: auto;
-  color: #fca5a5 !important;
+  color: #923636 !important;
+  font-weight: 500;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 .logout-btn:hover {
-  background: rgba(239, 68, 68, 0.1) !important;
-  color: #fca5a5 !important;
+  background: rgba(239, 68, 68, 0.203) !important;
+  color: #9f3535 !important;
 }
 .student-main-content {
   flex: 1;

@@ -7,7 +7,11 @@ export class CatalogService {
   }
   async getAllMicroactivities() {
     try {
-      const response = await this.microactivityService.getAllMicroactivities();
+      // Solicitar explícitamente un límite alto para el catálogo cuando se
+      // piden todas las microactividades sin paginación desde la UI.
+      // Esto evita tener que reiniciar el backend si está con el límite por
+      // defecto en 10 en la instancia en ejecución.
+      const response = await this.microactivityService.getAllMicroactivities({ limit: 1000 });
       return this.adaptMicroactivitiesForCatalog(response.data || []);
     } catch (error) {
       throw this.handleServiceError(error, 'Error al cargar el catálogo');

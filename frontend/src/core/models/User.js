@@ -1,4 +1,3 @@
-﻿// Modelo de dominio: Usuario
 export class User {
   constructor({
     id = null,
@@ -21,18 +20,14 @@ export class User {
     this.createdAt = createdAt;
     this.updatedAt = updatedAt;
   }
-
   get fullName() {
     return ${'$'}{this.firstName} {this.lastName}.trim();
   }
-
   isAdmin() {
     return this.role === 'admin';
   }
-
   isStudent() {
     return this.role === 'student';
   }
 }
-
 export default User;

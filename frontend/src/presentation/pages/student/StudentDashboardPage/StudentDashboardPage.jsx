@@ -115,7 +115,7 @@ const StudentDashboardPage = () => {
       case 'history':
         return (
           <div className="section-content">
-            <h2>Mi Historia de Actividades</h2>
+            <h2>Mi Historial de Actividades</h2>
             <div className="content-card">
               {loading ? (
                 <p>Cargando historial...</p>
@@ -228,7 +228,7 @@ const StudentDashboardPage = () => {
             onClick={() => handleNavigation('history')}
           >
             <i className="fas fa-history"></i>
-            <span>Mi Historia</span>
+            <span>Mi Historial</span>
           </button>
           <button
             className={`nav-item ${activeSection === 'mood' ? 'active' : ''}`}
@@ -258,7 +258,7 @@ const StudentDashboardPage = () => {
         <div className="student-header">
           <h1>Panel de Estudiante</h1>
           <div className="user-info">
-            <span>Bienvenido, {user?.username || 'Usuario'}</span>
+            <span>Bienvenido, {user.firstName}</span>
           </div>
         </div>
         <main className="student-content">

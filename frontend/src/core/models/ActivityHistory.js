@@ -1,4 +1,3 @@
-﻿// Modelo de dominio: Historial de Actividades
 export class ActivityHistory {
   constructor({
     id = null,
@@ -16,5 +15,4 @@ export class ActivityHistory {
     this.mood = mood;
   }
 }
-
 export default ActivityHistory;

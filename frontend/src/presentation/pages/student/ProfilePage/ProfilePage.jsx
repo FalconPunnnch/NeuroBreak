@@ -1,21 +1,22 @@
-// HU05 - Profile Page con Bootstrap + Modal
+// HU05 - Profile Page con modal de edición
 // frontend/src/presentation/pages/student/ProfilePage/ProfilePage.jsx
 
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Header from '../../../components/layout/Header/Header.jsx';
+import HeaderLogged from '../../../components/layout/Header/HeaderLogged/HeaderLogged';
+import FloatingTimerButton from '../../../../components/FloatingTimerButton';
 import './ProfilePage.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 const ProfilePage = () => {
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
-
+  
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [badges, setBadges] = useState([]);
   const [isUploadingPhoto, setIsUploadingPhoto] = useState(false);
-
+  
+  // Estados para el modal de edición
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editFormData, setEditFormData] = useState({
     firstName: '',
@@ -31,15 +32,20 @@ const ProfilePage = () => {
 
   const loadUserData = async () => {
     try {
+      const token = localStorage.getItem('token');
       const storedUser = localStorage.getItem('user');
-      if (!storedUser) {
+
+      if (!token || !storedUser) {
         navigate('/login');
         return;
       }
 
       const userData = JSON.parse(storedUser);
+      console.log('Usuario cargado:', userData);
+      
       setUser(userData);
-
+      
+      // Inicializar datos del formulario
       setEditFormData({
         firstName: userData.firstName || '',
         lastName: userData.lastName || '',
@@ -73,45 +79,59 @@ const ProfilePage = () => {
 
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
+    
     if (!file) return;
+
     if (!file.type.startsWith('image/')) {
       alert('Por favor selecciona una imagen válida');
       return;
     }
+
     if (file.size > 5 * 1024 * 1024) {
       alert('La imagen no debe superar 5MB');
       return;
     }
 
     setIsUploadingPhoto(true);
+
     try {
       const formData = new FormData();
       formData.append('profilePicture', file);
 
       const token = localStorage.getItem('token');
+      
       const response = await fetch('http://localhost:3001/api/users/profile-picture', {
         method: 'POST',
-        headers: { 'Authorization': `Bearer ${token}` },
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
         body: formData
       });
 
       const data = await response.json();
+
       if (response.ok) {
-        const updatedUser = { ...user, profilePicture: data.profilePicture };
+        const updatedUser = {
+          ...user,
+          profilePicture: data.profilePicture
+        };
+        
         setUser(updatedUser);
         localStorage.setItem('user', JSON.stringify(updatedUser));
+        
         alert('✅ Foto de perfil actualizada exitosamente');
       } else {
         alert(data.message || 'Error al subir la foto');
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('Error al subir la foto.');
+      alert('Error al subir la foto. Intenta de nuevo.');
     } finally {
       setIsUploadingPhoto(false);
     }
   };
 
+  // Abrir modal de edición
   const handleOpenEditModal = () => {
     setEditFormData({
       firstName: user.firstName || '',
@@ -122,20 +142,27 @@ const ProfilePage = () => {
     setIsModalOpen(true);
   };
 
+  // Cerrar modal
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setEditError('');
   };
 
+  // Manejar cambios en el formulario de edición
   const handleEditChange = (e) => {
     const { name, value } = e.target;
-    setEditFormData((prev) => ({ ...prev, [name]: value }));
+    setEditFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
+  // Guardar cambios del perfil
   const handleSaveProfile = async (e) => {
     e.preventDefault();
     setEditError('');
 
+    // Validaciones
     if (!editFormData.firstName.trim()) {
       setEditError('El nombre es obligatorio');
       return;
@@ -147,22 +174,37 @@ const ProfilePage = () => {
     }
 
     setIsSaving(true);
+
     try {
       const token = localStorage.getItem('token');
+      
       const response = await fetch('http://localhost:3001/api/users/profile', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify(editFormData)
+        body: JSON.stringify({
+          firstName: editFormData.firstName.trim(),
+          lastName: editFormData.lastName.trim(),
+          bio: editFormData.bio.trim()
+        })
       });
 
       const data = await response.json();
+
       if (response.ok) {
-        const updatedUser = { ...user, ...data.user };
+        // Actualizar usuario en estado y localStorage
+        const updatedUser = {
+          ...user,
+          firstName: data.user.firstName,
+          lastName: data.user.lastName,
+          bio: data.user.bio
+        };
+        
         setUser(updatedUser);
         localStorage.setItem('user', JSON.stringify(updatedUser));
+        
         setIsModalOpen(false);
         alert('✅ Perfil actualizado exitosamente');
       } else {
@@ -170,7 +212,7 @@ const ProfilePage = () => {
       }
     } catch (error) {
       console.error('Error:', error);
-      setEditError('Error de conexión.');
+      setEditError('Error de conexión. Intenta de nuevo.');
     } finally {
       setIsSaving(false);
     }
@@ -178,166 +220,241 @@ const ProfilePage = () => {
 
   if (isLoading) {
     return (
-      <div className="d-flex flex-column align-items-center justify-content-center vh-100">
-        <div className="spinner-border text-primary" role="status"></div>
-        <p className="mt-3">Cargando perfil...</p>
+      <div className="profile-page">
+        <HeaderLogged />
+        <div className="loading-container">
+          <div className="spinner"></div>
+          <p>Cargando perfil...</p>
+        </div>
       </div>
     );
   }
 
+  if (!user) {
+    return null;
+  }
+
   return (
-    <div className="profile-page bg-light min-vh-100">
-      <Header />
-      <main className="container py-5">
-        <div className="row g-4">
+    <div className="profile-page">
+      <HeaderLogged />
+      
+      <main className="profile-main">
+        <div className="profile-container">
+          
           {/* Columna Izquierda */}
-          <div className="col-lg-4 text-center">
-            <div className="card p-4 shadow-sm">
-              <div className="d-flex flex-column align-items-center">
-                <div className="avatar mb-3">
-                  {user.profilePicture ? (
-                    <img
-                      src={`http://localhost:3001${user.profilePicture}`}
-                      alt="Perfil"
-                      className="img-fluid rounded"
-                    />
-                  ) : (
-                    <div className="avatar-placeholder">
-                      <i className="bi bi-person fs-1 text-muted"></i>
-                    </div>
-                  )}
-                </div>
-
-                <button
-                  className="btn btn-warning text-white mb-3"
-                  onClick={handleChangePhoto}
-                  disabled={isUploadingPhoto}
-                >
-                  {isUploadingPhoto ? '⏳ Subiendo...' : '📷 Cambiar foto'}
-                </button>
-
-                <input
-                  ref={fileInputRef}
-                  type="file"
-                  accept="image/*"
-                  onChange={handleFileChange}
-                  hidden
-                />
-
-                <h4 className="fw-bold text-dark">
-                  {user.firstName} {user.lastName}
-                </h4>
-
-                <button className="btn btn-dark mt-3" onClick={handleLogout}>
-                  Cerrar Sesión
-                </button>
+          <div className="profile-left">
+            <div className="avatar-container">
+              <div className="avatar">
+                {user.profilePicture ? (
+                  <img 
+                    src={`http://localhost:3001${user.profilePicture}`} 
+                    alt={`${user.firstName} ${user.lastName}`} 
+                  />
+                ) : (
+                  <div className="avatar-placeholder">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </svg>
+                  </div>
+                )}
               </div>
+              
+              <button 
+                className="btn-change-photo"
+                onClick={handleChangePhoto}
+                disabled={isUploadingPhoto}
+              >
+                {isUploadingPhoto ? '⏳ Subiendo...' : '📷 Cambiar foto'}
+              </button>
+              
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                onChange={handleFileChange}
+                style={{ display: 'none' }}
+              />
             </div>
+
+            <h1 className="user-name">
+              {user.firstName} {user.lastName}
+            </h1>
+
+            <button 
+              className="btn-logout"
+              onClick={handleLogout}
+            >
+              Cerrar Sesión
+            </button>
           </div>
 
           {/* Columna Derecha */}
-          <div className="col-lg-8">
-            <div className="card p-4 shadow-sm mb-4">
-              <h5 className="fw-bold mb-3 text-primary">Información Personal</h5>
-              <div className="row">
-                <div className="col-md-6 mb-2">
-                  <strong>Nombre:</strong> {user.firstName}
+          <div className="profile-right">
+            
+            {/* Información Personal */}
+            <div className="profile-section">
+              <h2 className="section-title">Información Personal</h2>
+              
+              <div className="info-grid">
+                <div className="info-item">
+                  <span className="info-label">NOMBRE:</span>
+                  <span className="info-value">{user.firstName || 'No especificado'}</span>
                 </div>
-                <div className="col-md-6 mb-2">
-                  <strong>Apellido:</strong> {user.lastName}
+
+                <div className="info-item">
+                  <span className="info-label">APELLIDO:</span>
+                  <span className="info-value">{user.lastName || 'No especificado'}</span>
                 </div>
-                <div className="col-md-6 mb-2">
-                  <strong>Email:</strong> {user.email}
+
+                <div className="info-item">
+                  <span className="info-label">EMAIL:</span>
+                  <span className="info-value">{user.email || 'No especificado'}</span>
                 </div>
-                <div className="col-md-6 mb-2">
-                  <strong>Rol:</strong>{' '}
-                  {user.role === 'student' ? '🎓 Estudiante' : '👨‍🏫 Profesor'}
+
+                <div className="info-item">
+                  <span className="info-label">ROL:</span>
+                  <span className="info-value">
+                    <span className="role-badge">
+                      {user.role === 'student' ? '🎓 Estudiante' : '👨‍🏫 Profesor'}
+                    </span>
+                  </span>
                 </div>
               </div>
             </div>
 
-            <div className="card p-4 shadow-sm mb-4">
-              <h5 className="fw-bold mb-3 text-primary">Acerca de mí</h5>
-              <p>{user.bio || 'Sin descripción aún.'}</p>
+            {/* Acerca de mí */}
+            <div className="profile-section">
+              <h2 className="section-title">Acerca de mí</h2>
+              <p className="bio-text">
+                {user.bio || 'Estudiante universitario comprometido con mi bienestar y rendimiento académico. Utilizo NeuroBreak para mantener un equilibrio saludable entre el estudio y el descanso.'}
+              </p>
             </div>
 
-            <div className="text-center">
-              <button className="btn btn-warning text-white" onClick={handleOpenEditModal}>
+            {/* Insignias */}
+            <div className="profile-section">
+              <h2 className="section-title">Mis Insignias</h2>
+              
+              <div className="badges-container">
+                {badges.map(badge => (
+                  <div 
+                    key={badge.id} 
+                    className={`badge-item ${badge.earned ? 'earned' : 'locked'}`}
+                    title={badge.name}
+                  >
+                    <div className="badge-icon">
+                      {badge.earned ? badge.icon : '🔒'}
+                    </div>
+                    <p className="badge-name">{badge.name}</p>
+                  </div>
+                ))}
+              </div>
+
+              <p className="badges-hint">
+                💡 Completa más actividades para desbloquear insignias
+              </p>
+            </div>
+
+            {/* Botón Editar Perfil */}
+            <div className="profile-actions">
+              <button 
+                className="btn-edit-profile"
+                onClick={handleOpenEditModal}
+              >
                 ✏️ Editar Perfil
               </button>
             </div>
+
           </div>
+
         </div>
       </main>
 
-      {/* Modal Bootstrap */}
+      {/* Modal de Edición */}
       {isModalOpen && (
-        <div className="modal fade show d-block" style={{ background: 'rgba(0,0,0,0.6)' }}>
-          <div className="modal-dialog modal-dialog-centered">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">✏️ Editar Perfil</h5>
-                <button type="button" className="btn-close" onClick={handleCloseModal}></button>
-              </div>
-              <div className="modal-body">
-                {editError && <div className="alert alert-danger">{editError}</div>}
-
-                <form onSubmit={handleSaveProfile}>
-                  <div className="mb-3">
-                    <label className="form-label">Nombre</label>
-                    <input
-                      type="text"
-                      name="firstName"
-                      className="form-control"
-                      value={editFormData.firstName}
-                      onChange={handleEditChange}
-                      disabled={isSaving}
-                    />
-                  </div>
-
-                  <div className="mb-3">
-                    <label className="form-label">Apellido</label>
-                    <input
-                      type="text"
-                      name="lastName"
-                      className="form-control"
-                      value={editFormData.lastName}
-                      onChange={handleEditChange}
-                      disabled={isSaving}
-                    />
-                  </div>
-
-                  <div className="mb-3">
-                    <label className="form-label">Acerca de mí</label>
-                    <textarea
-                      name="bio"
-                      className="form-control"
-                      rows="3"
-                      value={editFormData.bio}
-                      onChange={handleEditChange}
-                      disabled={isSaving}
-                    ></textarea>
-                  </div>
-
-                  <div className="text-end">
-                    <button
-                      type="button"
-                      className="btn btn-secondary me-2"
-                      onClick={handleCloseModal}
-                      disabled={isSaving}
-                    >
-                      Cancelar
-                    </button>
-                    <button type="submit" className="btn btn-primary" disabled={isSaving}>
-                      {isSaving ? 'Guardando...' : 'Guardar Cambios'}
-                    </button>
-                  </div>
-                </form>
-              </div>
+        <div className="modal-overlay" onClick={handleCloseModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h2>✏️ Editar Perfil</h2>
+              <button className="modal-close" onClick={handleCloseModal}>
+                ✕
+              </button>
             </div>
+
+            <form onSubmit={handleSaveProfile} className="modal-form">
+              
+              {editError && (
+                <div className="error-message-box">
+                  {editError}
+                </div>
+              )}
+
+              <div className="form-group">
+                <label htmlFor="firstName">Nombre</label>
+                <input
+                  type="text"
+                  id="firstName"
+                  name="firstName"
+                  value={editFormData.firstName}
+                  onChange={handleEditChange}
+                  placeholder="Tu nombre"
+                  className="form-input"
+                  disabled={isSaving}
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="lastName">Apellido</label>
+                <input
+                  type="text"
+                  id="lastName"
+                  name="lastName"
+                  value={editFormData.lastName}
+                  onChange={handleEditChange}
+                  placeholder="Tu apellido"
+                  className="form-input"
+                  disabled={isSaving}
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="bio">Acerca de mí</label>
+                <textarea
+                  id="bio"
+                  name="bio"
+                  value={editFormData.bio}
+                  onChange={handleEditChange}
+                  placeholder="Cuéntanos un poco sobre ti..."
+                  className="form-textarea"
+                  rows="4"
+                  disabled={isSaving}
+                />
+              </div>
+
+              <div className="modal-actions">
+                <button 
+                  type="button" 
+                  className="btn-cancel"
+                  onClick={handleCloseModal}
+                  disabled={isSaving}
+                >
+                  Cancelar
+                </button>
+                <button 
+                  type="submit" 
+                  className="btn-save"
+                  disabled={isSaving}
+                >
+                  {isSaving ? 'Guardando...' : 'Guardar Cambios'}
+                </button>
+              </div>
+
+            </form>
           </div>
         </div>
       )}
+      
+      {/* Floating Timer Button */}
+      <FloatingTimerButton />
     </div>
   );
 };

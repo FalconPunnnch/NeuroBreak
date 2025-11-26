@@ -381,7 +381,7 @@ function TimerPage() {
             </div>
           </div>
           <div className="timer-page__card-footer">
-            <p>Esta actividad se iniciará automáticamente cuando termine el timer</p>
+            <p>Esta actividad se iniciará automáticamente cuando termine el timer.</p>
           </div>
         </div>
         {}

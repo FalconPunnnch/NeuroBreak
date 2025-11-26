@@ -1,27 +1,45 @@
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../../state/contexts/AuthContext";
 import logoNb from "../../../../assets/images/NeuroBreak.png";
-
-export default function Header() {
-  const { user, isAuthenticated, logout } = useAuth();
-
+import { roleStrategyFactory } from '../../../../patterns/roles/RoleStrategyFactory';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './Header.css';
+const Header = () => {
+  const { isAuthenticated, user, logout } = useAuth();
+  const [showDropdown, setShowDropdown] = useState(false);
+  const navigate = useNavigate();
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (showDropdown && !event.target.closest('.user-menu')) {
+        setShowDropdown(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showDropdown]);
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+  const handleLogout = async () => {
+    await logout();
+    setShowDropdown(false);
+    navigate('/');
+  };
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
   return (
-    <nav
-      className="navbar navbar-expand-lg sticky-top shadow-sm"
-      style={{ backgroundColor: "#93BDCC" }}
-    >
-      <div className="container d-flex align-items-center">
-        {/* LOGO */}
+    <header className="header shadow-sm">
+      <nav className="navbar navbar-expand-lg container">
         <Link className="navbar-brand d-flex align-items-center" to="/">
-          <img
-            src={logoNb}
-            alt="NeuroBreak"
-            style={{ height: "70px", objectFit: "contain" }}
-            className="me-2"
-          />
+          <img src={logoNb} alt="Logo NeuroBreak" className="logo-nb me-2" />
         </Link>
-
-        {/* Botón hamburguesa (pantallas pequeñas) */}
         <button
           className="navbar-toggler"
           type="button"
@@ -33,60 +51,66 @@ export default function Header() {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-
-        {/* Links de navegación */}
-        <div className="collapse navbar-collapse justify-content-center" id="navbarNav">
-          <ul className="navbar-nav gap-3 text-center">
+        <div className="collapse navbar-collapse justify-content-end align-items-center" id="navbarNav">
+          <ul className="navbar-nav gap-4 me-3">
             <li className="nav-item">
-              <Link className="nav-link text-white fw-semibold" to="/">
+              <Link to="/" className="nav-link text-white fw-medium">
                 Home
               </Link>
             </li>
             <li className="nav-item">
-              <a
-                href="#como-funciona"
-                className="nav-link text-white fw-semibold"
-              >
-                ¿Cómo funciona?
-              </a>
+              <Link to="/catalog" className="nav-link text-white fw-medium">
+                Catálogo
+              </Link>
             </li>
             <li className="nav-item">
-              <a
-                href="#sobre-nosotros"
-                className="nav-link text-white fw-semibold"
+              <button 
+                onClick={() => scrollToSection('sobre-nosotros')} 
+                className="nav-link text-white fw-medium"
+                style={{ cursor: 'pointer' }}
               >
                 Sobre nosotros
-              </a>
+              </button>
             </li>
           </ul>
         </div>
-
-        {/* Sección derecha */}
-        <div className="ms-auto">
-          {isAuthenticated ? (
-            <div className="d-flex align-items-center gap-2">
-              <span className="text-white fw-bold">
-                👤 {user?.nombre ?? "Usuario"}
-              </span>
-              <button
-                className="btn text-white fw-bold"
-                style={{ backgroundColor: "#EDC04E", borderRadius: "10px" }}
-                onClick={logout}
+        <div className="d-flex position-relative">
+          {isAuthenticated && user ? (
+            <div className="user-menu">
+              <button 
+                className="btn user-menu-btn fw-semibold px-4 d-flex align-items-center gap-2"
+                onClick={toggleDropdown}
               >
-                Cerrar sesión
+                <span>Hola, {user.firstName}</span>
+                <i className={`fas fa-chevron-${showDropdown ? 'up' : 'down'}`}></i>
               </button>
+              {showDropdown && (
+                <div className="dropdown-menu-custom show">
+                  <Link to="/profile" className="dropdown-item" onClick={() => setShowDropdown(false)}>
+                    <i className="fas fa-user me-2"></i>Perfil
+                  </Link>
+                  <Link
+                    to={user ? roleStrategyFactory.getRedirectionData(user).path : '/catalog'}
+                    className="dropdown-item"
+                    onClick={() => setShowDropdown(false)}
+                  >
+                    <i className="fas fa-chart-bar me-2"></i>Dashboard
+                  </Link>
+                  <div className="dropdown-divider"></div>
+                  <button className="dropdown-item text-danger" onClick={handleLogout}>
+                    <i className="fas fa-sign-out-alt me-2"></i>Cerrar Sesión
+                  </button>
+                </div>
+              )}
             </div>
           ) : (
-            <Link
-              to="/login"
-              className="btn text-white fw-bold"
-              style={{ backgroundColor: "#EDC04E", borderRadius: "10px" }}
-            >
+            <Link to="/login" className="btn login-btn fw-semibold px-4">
               Login
             </Link>
           )}
         </div>
-      </div>
-    </nav>
+      </nav>
+    </header>
   );
-}
+};
+export default Header;

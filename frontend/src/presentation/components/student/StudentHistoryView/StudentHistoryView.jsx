@@ -4,7 +4,7 @@ const StudentHistoryView = ({ user }) => {
   return (
     <div className="student-history-view">
       <div className="history-header">
-        <h2>Mi Historia</h2>
+        <h2>Mi Historial</h2>
         <p>Revisa tu progreso y actividades completadas</p>
       </div>
       <div className="history-content">

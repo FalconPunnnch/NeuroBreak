@@ -10,6 +10,16 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     checkAuth();
   }, []);
+
+  // Listen for external auth changes (e.g. OAuth callback wrote token/user to localStorage)
+  useEffect(() => {
+    const onAuthChanged = () => {
+      // Re-run checkAuth to refresh context from localStorage
+      checkAuth();
+    };
+    window.addEventListener('auth:changed', onAuthChanged);
+    return () => window.removeEventListener('auth:changed', onAuthChanged);
+  }, []);
   const checkAuth = async () => {
     const token = localStorage.getItem('token');
     const userData = localStorage.getItem('user');

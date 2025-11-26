@@ -38,6 +38,8 @@ const OAuthCallbackPage = () => {
       const data = await response.json();
       if (response.ok && data.success) {
         localStorage.setItem('user', JSON.stringify(data.user));
+        // Notify app that auth data changed so AuthContext can refresh immediately
+        try { window.dispatchEvent(new Event('auth:changed')); } catch (e) { /* noop */ }
         const userRole = (data.user.rol || data.user.role || 'user').toLowerCase();
         if (userRole === 'admin') {
           navigate('/admin/dashboard');

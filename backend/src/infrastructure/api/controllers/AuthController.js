@@ -298,7 +298,9 @@ class AuthController {
   async googleCallback(req, res) {
     try {
       const user = req.user;
+      console.log('🔔 AuthController.googleCallback - req.user:', user ? { id: user.id, email: user.email, role: user.role } : null);
       if (!user) {
+        console.warn('⚠️ AuthController.googleCallback - no user on req (oauth failed)');
         return res.redirect(`${process.env.FRONTEND_URL || 'http://localhost:3000'}/login?error=oauth_failed`);
       }
       const token = jwt.sign(
@@ -310,6 +312,7 @@ class AuthController {
         process.env.JWT_SECRET || 'your-secret-key-change-this',
         { expiresIn: '7d' }
       );
+      console.log('🔑 AuthController.googleCallback - issuing token for userId:', user.id, 'role:', user.role);
       res.redirect(`${process.env.FRONTEND_URL || 'http://localhost:3000'}/auth/callback?token=${token}`);
     } catch (error) {
       console.error('Error en Google callback:', error);

@@ -171,7 +171,7 @@ const MicroactivitiesTable = ({ microactivities, loading, onEdit, onDelete }) =>
             <th>Título</th>
             <th>Categoría</th>
             <th>Duración</th>
-            <th>Tiempo de concentración</th>
+            <th>Tiempo de concentración sugerido</th>
             <th>Acciones</th>
           </tr>
         </thead>

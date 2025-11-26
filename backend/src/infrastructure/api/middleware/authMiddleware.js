@@ -13,6 +13,10 @@ const authMiddleware = (req, res, next) => {
       token, 
       process.env.JWT_SECRET || 'your-secret-key-change-this'
     );
+    // Debug: log decoded token role (avoid logging sensitive info in production)
+    try {
+      console.log('🔐 authMiddleware - decoded token:', { userId: decoded.userId, email: decoded.email, role: decoded.role });
+    } catch (e) { /* noop */ }
     req.userId = decoded.userId;
     req.userEmail = decoded.email;
     req.userRole = decoded.role;

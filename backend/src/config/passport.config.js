@@ -34,12 +34,12 @@ if (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) {
             return done(null, user);
           }
           user = await authService.createUser({
-            firstName: profile.name.givenName || profile.displayName.split(' ')[0],
-            lastName: profile.name.familyName || profile.displayName.split(' ')[1] || '',
+            firstName: (profile.name?.givenName || (profile.displayName ? profile.displayName.split(' ')[0] : '') || 'Usuario').trim(),
+            lastName: (profile.name?.familyName || (profile.displayName ? profile.displayName.split(' ')[1] : '') || '').trim(),
             email: email,
             password: null, // No tiene contraseña (OAuth)
             role: 'student',
-            profilePicture: profile.photos[0]?.value || null
+            profilePicture: profile.photos?.[0]?.value || null
           });
           console.log(`✅ Nuevo usuario creado con Google: ${email}`);
           try {

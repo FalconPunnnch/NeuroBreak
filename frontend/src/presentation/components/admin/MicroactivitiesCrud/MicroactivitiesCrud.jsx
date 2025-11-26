@@ -398,7 +398,7 @@ const MicroactivityForm = ({ formData, onChange }) => (
       />
     </div>
     <div className="form-group">
-      <label>Tiempo de concentración (minutos)</label>
+      <label>Tiempo de concentración sugerido (minutos)</label>
       <input
         type="number"
         className="form-control"

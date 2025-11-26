@@ -38,7 +38,12 @@ const OAuthCallbackPage = () => {
       const data = await response.json();
       if (response.ok && data.success) {
         localStorage.setItem('user', JSON.stringify(data.user));
-        navigate('/dashboard');
+        const userRole = (data.user.rol || data.user.role || 'user').toLowerCase();
+        if (userRole === 'admin') {
+          navigate('/admin/dashboard');
+        } else {
+          navigate('/dashboard');
+        }
       } else {
         throw new Error('No se pudo obtener datos del usuario');
       }

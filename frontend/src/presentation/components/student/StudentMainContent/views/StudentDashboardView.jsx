@@ -23,7 +23,7 @@ const StudentDashboardView = ({ metrics = [], loading = false, onRefresh = () =>
       <div className="dashboard-welcome">
         <div className="welcome-content">
           <h2 className="welcome-title">
-            ¡Hola {user?.firstName}! 👋
+            ¡Hola {user?.firstName || 'Usuario'}! 👋
           </h2>
           <p className="welcome-subtitle">
             Aquí tienes un resumen de tu progreso en bienestar

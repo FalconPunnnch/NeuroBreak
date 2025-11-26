@@ -20,7 +20,7 @@ const HeaderLogged = () => {
             to="/catalog"
             className={`nav-link ${isActive('/catalog') ? 'active' : ''}`}
           >
-            Catálogo de Actividades
+            Catálogo de Microactividades
           </Link>
 
           <Link

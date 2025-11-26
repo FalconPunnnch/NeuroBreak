@@ -391,7 +391,7 @@ function ActivityRunnerPage() {
                   onClick={handleCloseSuccessModal}
                   disabled={loadingNextActivity}
                 >
-                  Continuar
+                  Registrar Estado Emocional
                 </button>
                 <button 
                   className="btn btn--primary"

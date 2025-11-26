@@ -1,6 +1,17 @@
 const path = require('path');
 
 describe('AuthController', () => {
+  beforeAll(() => {
+    jest.spyOn(console, 'log').mockImplementation(() => {});
+    jest.spyOn(console, 'error').mockImplementation(() => {});
+    jest.spyOn(console, 'warn').mockImplementation(() => {});
+    try {
+      const winston = require('../../../src/utils/logger');
+      if (winston && winston.log) {
+        jest.spyOn(winston, 'log').mockImplementation(() => {});
+      }
+    } catch (e) {}
+  });
   beforeEach(() => {
     jest.resetModules();
   });

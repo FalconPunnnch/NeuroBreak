@@ -13,7 +13,7 @@ const StudentProfileView = ({ user }) => {
             <i className="fas fa-user-circle"></i>
           </div>
           <div className="profile-info">
-            <h3>{user?.firstName} {user?.lastName}</h3>
+            <h3>{user?.firstName || 'Usuario'} {user?.lastName || ''}</h3>
             <p>{user?.email}</p>
             <span className="profile-role">Estudiante</span>
           </div>

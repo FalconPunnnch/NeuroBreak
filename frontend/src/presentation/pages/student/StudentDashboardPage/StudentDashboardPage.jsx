@@ -258,7 +258,7 @@ const StudentDashboardPage = () => {
         <div className="student-header">
           <h1>Panel de Estudiante</h1>
           <div className="user-info">
-            <span>Bienvenido, {user.firstName}</span>
+            <span>Bienvenido, {user?.firstName || 'Usuario'}</span>
           </div>
         </div>
         <main className="student-content">

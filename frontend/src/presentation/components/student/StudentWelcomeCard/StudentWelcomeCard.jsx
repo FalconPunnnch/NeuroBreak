@@ -21,7 +21,7 @@ const StudentWelcomeCard = ({ user, onSectionChange }) => {
 };
 const WelcomeContent = ({ user }) => (
   <div className="student-welcome-content">
-    <h2>¡Hola {user?.firstName}! 👋</h2>
+  <h2>¡Hola {user?.firstName || 'Usuario'}! 👋</h2>
     <p>¿Qué harás el día de hoy para mejorar tu bienestar?</p>
   </div>
 );

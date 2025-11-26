@@ -315,7 +315,7 @@ const ProfilePage = () => {
                   <span className="info-label">ROL:</span>
                   <span className="info-value">
                     <span className="role-badge">
-                      {user.role === 'student' ? '🎓 Estudiante' : '👨‍🏫 Profesor'}
+                      {user.role === 'student' ? '🎓 Estudiante' : '👨‍🏫 Admin'}
                     </span>
                   </span>
                 </div>

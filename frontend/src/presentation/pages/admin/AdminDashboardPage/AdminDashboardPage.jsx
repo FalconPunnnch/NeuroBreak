@@ -13,6 +13,8 @@ import {
 } from '../../../../core/services/NavigationHandlers';
 import { useMicroactivityStats } from '../../../hooks/useMicroactivityStats';
 import './AdminDashboardPage.css';
+
+
 const AdminDashboardPage = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
@@ -54,12 +56,6 @@ const AdminDashboardPage = () => {
       label: 'Dashboard', 
       icon: 'fas fa-home', 
       active: activeSection === 'dashboard'
-    },
-    { 
-      id: 'profile', 
-      label: 'Perfil', 
-      icon: 'fas fa-user', 
-      active: activeSection === 'profile'
     },
     { 
       id: 'microactivities', 

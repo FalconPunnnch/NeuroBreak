@@ -14,7 +14,7 @@ const StudentProfile = ({ user }) => (
       <i className="fas fa-user-circle"></i>
     </div>
     <div className="student-info">
-      <h4>{user?.firstName} {user?.lastName}</h4>
+  <h4>{user?.firstName || 'Usuario'} {user?.lastName || ''}</h4>
       <p>Estudiante</p>
     </div>
   </div>

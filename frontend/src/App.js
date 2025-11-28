@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import AppRoutes from './presentation/routes/AppRoutes';
-import { AuthProvider } from './state/contexts/AuthContext';
-import { ActivityProvider } from './state/contexts/ActivityContext';
-import { TimerProvider } from './store/TimerContext';
+import AppRoutes from './AppRoutes';
+import { AuthProvider } from 'contexts/AuthContext';
+import { ActivityProvider } from 'contexts/ActivityContext';
+import { TimerProvider } from 'contexts/TimerContext';
 import './App.css';
 import './styles/global.css';
 function App() {

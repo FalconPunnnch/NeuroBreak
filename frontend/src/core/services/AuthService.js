@@ -1,4 +1,4 @@
-import apiClient from '../../infrastructure/api/apiClient';
+import apiClient from 'infrastructure/api/apiClient';
 export class AuthService {
   constructor() {
     this.currentUser = null;
@@ -28,12 +28,12 @@ export class AuthService {
       }
       return {
         success: false,
-        error: 'Credenciales inválidas'
+        error: 'Credenciales invï¿½lidas'
       };
     } catch (error) {
       return {
         success: false,
-        error: error.response?.data?.message || 'Error de conexión'
+        error: error.response?.data?.message || 'Error de conexiï¿½n'
       };
     }
   }
@@ -56,7 +56,7 @@ export class AuthService {
     try {
       await apiClient.post('/auth/logout');
     } catch (error) {
-      console.warn('Error al cerrar sesión en el servidor:', error);
+      console.warn('Error al cerrar sesiï¿½n en el servidor:', error);
     }
     this.currentUser = null;
     localStorage.removeItem('token');

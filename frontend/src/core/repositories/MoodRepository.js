@@ -1,4 +1,4 @@
-import apiClient from '../../infrastructure/api/apiClient';
+import apiClient from 'infrastructure/api/apiClient';
 export class MoodRepository {
   constructor(httpClient = apiClient) {
     this.http = httpClient;
@@ -27,7 +27,7 @@ export class MoodRepository {
       });
       return response.data;
     } catch (error) {
-      throw new Error(`Error al obtener estadísticas de estado emocional: ${error.message}`);
+      throw new Error(`Error al obtener estadï¿½sticas de estado emocional: ${error.message}`);
     }
   }
   async delete(entryId) {
@@ -50,7 +50,7 @@ export class MoodRepository {
         errors: failed
       };
     } catch (error) {
-      throw new Error(`Error en operación batch de estado emocional: ${error.message}`);
+      throw new Error(`Error en operaciï¿½n batch de estado emocional: ${error.message}`);
     }
   }
 }

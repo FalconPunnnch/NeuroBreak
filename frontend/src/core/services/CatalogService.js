@@ -1,5 +1,5 @@
 import { MicroactivityService } from './MicroactivityService.js';
-import { filterFactory } from '../../patterns/filters/FilterFactory.js';
+import { filterFactory } from 'patterns/filters';
 export class CatalogService {
   constructor(microactivityServiceInstance = null) {
     this.microactivityService = microactivityServiceInstance || new MicroactivityService();
@@ -69,7 +69,9 @@ export class CatalogService {
       ...this.adaptSingleMicroactivity(microactivity),
       steps: microactivity.steps || [],
       description: microactivity.description || '',
-      concentrationTime: microactivity.concentration_time || 0
+      concentrationTime: microactivity.concentration_time || 0,
+      requirements: this.normalizeArray(microactivity.requirements),
+      benefits: this.normalizeArray(microactivity.benefits)
     };
   }
   adaptSingleMicroactivity(item) {
@@ -83,8 +85,21 @@ export class CatalogService {
       createdAt: item.created_at,
       updatedAt: item.updated_at,
       categoryIcon: this.getCategoryIcon(item.category),
-      durationLabel: this.getDurationLabel(item.duration)
+      durationLabel: this.getDurationLabel(item.duration),
+      requirements: this.normalizeArray(item.requirements),
+      benefits: this.normalizeArray(item.benefits),
+      steps: this.normalizeArray(item.steps)
     };
+  }
+  normalizeArray(value) {
+    if (Array.isArray(value)) return value;
+    if (typeof value === 'string') {
+      try {
+        const parsed = JSON.parse(value);
+        return Array.isArray(parsed) ? parsed : (parsed ? [parsed] : []);
+      } catch { return value ? [value] : []; }
+    }
+    return [];
   }
   getCategoryIcon(category) {
     const icons = {

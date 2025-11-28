@@ -1,4 +1,4 @@
-const MoodControllerClass = require('../../../src/application/controllers/MoodController');
+const MoodControllerClass = require('../../../src/api/controllers/MoodController');
 
 describe('MoodController', () => {
   test('createMoodEntry - valid input calls service and returns 201', async () => {

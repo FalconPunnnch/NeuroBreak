@@ -1,4 +1,4 @@
-import apiClient from '../../infrastructure/api/apiClient';
+import apiClient from 'infrastructure/api/apiClient';
 export class HistoryRepository {
   async create(historyEntry) {
     const response = await apiClient.post('/activity-history', historyEntry);

@@ -1,5 +1,5 @@
-import { playEndSound } from '../../utils/audio';
-import notificationService from '../../services/notificationService';
+import { playEndSound } from 'utils/audio';
+import notificationService from 'services/notificationService';
 
 export class TimerStrategy {
   start(config, onTick, onComplete, onError) {

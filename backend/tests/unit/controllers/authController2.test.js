@@ -4,8 +4,8 @@ const jwt = require('jsonwebtoken');
 // Mocks
 jest.mock('bcryptjs');
 jest.mock('jsonwebtoken');
-jest.mock('../../../src/core/application/services/AuthService');
-jest.mock('../../../src/core/application/services/EmailService');
+jest.mock('../../../src/services/AuthService');
+jest.mock('../../../src/services/EmailService');
 // Prevent actual DB connections during unit tests
 jest.mock('../../../src/infrastructure/database/connection');
 
@@ -32,12 +32,12 @@ describe('AuthController - register & login', () => {
     jwt.sign.mockReset();
 
     // Mock UserRepository methods
-    UserRepository = require('../../../src/domain/repositories/UserRepository');
+    UserRepository = require('../../../src/repositories/UserRepository');
     UserRepository.prototype.findByEmail = jest.fn();
     UserRepository.prototype.create = jest.fn();
 
-    AuthService = require('../../../src/domain/services/AuthService');
-    AuthController = require('../../../src/application/controllers/AuthController');
+    AuthService = require('../../../src/services/AuthService');
+    AuthController = require('../../../src/api/controllers/AuthController');
   });
 
   function mockRes() {
@@ -108,7 +108,7 @@ describe('AuthController - register & login', () => {
     };
 
     // Mockear el método login de AuthService para que el controlador lo use
-    AuthService = require('../../../src/domain/services/AuthService');
+    AuthService = require('../../../src/services/AuthService');
     AuthService.login = jest.fn().mockResolvedValue({
       user: {
         id: fakeUser.id,

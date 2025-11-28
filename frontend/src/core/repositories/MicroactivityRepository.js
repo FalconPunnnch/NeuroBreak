@@ -1,6 +1,6 @@
-import apiClient from '../../infrastructure/api/apiClient';
-import { ENDPOINTS } from '../../infrastructure/api/endpoints';
-import { CATEGORIES } from '../../config/constants';
+import apiClient from 'infrastructure/api/apiClient';
+import { ENDPOINTS } from 'infrastructure/api/endpoints';
+import { CATEGORIES } from 'config/constants';
 export class MicroactivityRepository {
   constructor(apiClientInstance = null) {
     this.apiClient = apiClientInstance || apiClient;
@@ -29,7 +29,7 @@ export class MicroactivityRepository {
       const response = await this.apiClient.get(`${ENDPOINTS.MICROACTIVITIES}?category=${encodeURIComponent(category)}`);
       return this.validateResponse(response);
     } catch (error) {
-      throw this.handleError(error, 'Error al obtener microactividades por categoría');
+      throw this.handleError(error, 'Error al obtener microactividades por categorï¿½a');
     }
   }
   async search(searchTerm) {
@@ -38,7 +38,7 @@ export class MicroactivityRepository {
       const response = await this.apiClient.get(`${ENDPOINTS.MICROACTIVITIES_SEARCH}?q=${encodeURIComponent(searchTerm)}`);
       return this.validateResponse(response);
     } catch (error) {
-      throw this.handleError(error, 'Error en búsqueda de microactividades');
+      throw this.handleError(error, 'Error en bï¿½squeda de microactividades');
     }
   }
   async getStats() {
@@ -46,7 +46,7 @@ export class MicroactivityRepository {
       const response = await this.apiClient.get(ENDPOINTS.MICROACTIVITIES_STATS);
       return this.validateResponse(response);
     } catch (error) {
-      throw this.handleError(error, 'Error al obtener estadísticas');
+      throw this.handleError(error, 'Error al obtener estadï¿½sticas');
     }
   }
   async findFavoritesByUser(userId) {
@@ -110,15 +110,15 @@ export class MicroactivityRepository {
   }
   validateId(id) {
     if (!id || (typeof id !== 'number' && typeof id !== 'string')) {
-      throw new Error('ID inválido');
+      throw new Error('ID invï¿½lido');
     }
     if (typeof id === 'string' && isNaN(Number(id))) {
-      throw new Error('ID debe ser numérico');
+      throw new Error('ID debe ser numï¿½rico');
     }
   }
   validateSearchTerm(searchTerm) {
     if (!searchTerm || typeof searchTerm !== 'string' || searchTerm.trim().length < 2) {
-      throw new Error('El término de búsqueda debe tener al menos 2 caracteres');
+      throw new Error('El tï¿½rmino de bï¿½squeda debe tener al menos 2 caracteres');
     }
   }
   sanitizeFilters(filters) {
@@ -132,7 +132,7 @@ export class MicroactivityRepository {
   }
   validateResponse(response) {
     if (!response || !response.data) {
-      throw new Error('Respuesta inválida del servidor');
+      throw new Error('Respuesta invï¿½lida del servidor');
     }
     if (response.data.success) {
       return response.data; // Devuelve {success: true, data: [...], pagination: {...}}
@@ -147,9 +147,9 @@ export class MicroactivityRepository {
       const status = error.response.status;
       const data = error.response.data;
       if (status === 401) {
-        return new Error('No autorizado. Por favor inicia sesión.');
+        return new Error('No autorizado. Por favor inicia sesiï¿½n.');
       } else if (status === 403) {
-        return new Error('No tienes permisos para realizar esta acción.');
+        return new Error('No tienes permisos para realizar esta acciï¿½n.');
       } else if (status === 404) {
         return new Error('Recurso no encontrado.');
       } else if (data && data.message) {

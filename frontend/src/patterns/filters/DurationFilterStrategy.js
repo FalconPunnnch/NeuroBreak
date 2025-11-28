@@ -1,5 +1,5 @@
 import FilterStrategy from './FilterStrategy.js';
-import { DURATIONS } from '../../config/constants.js';
+import { DURATIONS } from 'config/constants';
 export class DurationFilterStrategy extends FilterStrategy {
   apply(items, durationKey) {
     if (!this.isValidCriteria(durationKey) || durationKey === 'all') {

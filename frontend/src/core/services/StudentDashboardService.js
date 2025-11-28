@@ -1,4 +1,4 @@
-import ApiService from '../../infrastructure/api/ApiService';
+import ApiService from 'infrastructure/api/ApiService';
 import MoodService from './MoodService';
 class StudentDashboardService {
   constructor() {

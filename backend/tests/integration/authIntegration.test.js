@@ -1,7 +1,7 @@
 const request = require('supertest');
 
 // Mock external dependencies to avoid DB calls
-jest.mock('../../src/core/application/services/AuthService', () => ({
+jest.mock('../../src/services/AuthService', () => ({
   login: jest.fn(async () => ({
     user: {
       id: 20,
@@ -20,14 +20,14 @@ jest.mock('../../src/core/application/services/AuthService', () => ({
     role: 'student'
   }))
 }));
-jest.mock('../../src/core/application/services/EmailService');
+jest.mock('../../src/services/EmailService');
 jest.mock('bcryptjs');
 jest.mock('jsonwebtoken');
 
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const AuthService = require('../../src/core/application/services/AuthService');
-const EmailService = require('../../src/core/application/services/EmailService');
+const AuthService = require('../../src/services/AuthService');
+const EmailService = require('../../src/services/EmailService');
 
 const app = require('../../src/app');
 

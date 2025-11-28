@@ -1,10 +1,8 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const MicrosoftStrategy = require('passport-microsoft').Strategy;
-const AuthService = require('../core/application/services/AuthService');
-const EmailService = require('../core/application/services/EmailService');
-const authService = new AuthService();
-const emailService = new EmailService();
+const authService = require('../services/AuthService');
+const emailService = require('../services/EmailService');
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
@@ -27,10 +25,16 @@ if (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) {
       },
       async (accessToken, refreshToken, profile, done) => {
         try {
+          console.log('🔔 Google OAuth callback received. Profile summary: ', {
+            id: profile.id,
+            displayName: profile.displayName,
+            emails: profile.emails && profile.emails.map(e => e.value),
+            photos: profile.photos && profile.photos.map(p => p.value)
+          });
           const email = profile.emails[0].value;
           let user = await authService.findUserByEmail(email);
           if (user) {
-            console.log(`✅ Usuario existente login con Google: ${email}`);
+            console.log(`✅ Usuario existente login con Google: ${email} (role: ${user.role})`);
             return done(null, user);
           }
           user = await authService.createUser({

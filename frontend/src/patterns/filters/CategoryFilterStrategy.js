@@ -1,5 +1,5 @@
 import FilterStrategy from './FilterStrategy.js';
-import { CATEGORIES } from '../../config/constants.js';
+import { CATEGORIES } from 'config/constants';
 export class CategoryFilterStrategy extends FilterStrategy {
   apply(items, category) {
     if (!this.isValidCriteria(category) || category === 'all') {

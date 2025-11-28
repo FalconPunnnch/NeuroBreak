@@ -1,5 +1,5 @@
 import { MicroactivityRepository } from '../repositories/MicroactivityRepository';
-import { CATEGORIES } from '../../config/constants';
+import { CATEGORIES } from 'config/constants';
 export class MicroactivityService {
   constructor(repositoryInstance = null) {
     this.repository = repositoryInstance || new MicroactivityRepository();
@@ -26,7 +26,7 @@ export class MicroactivityService {
       const result = await this.repository.findByCategory(category);
       return result.data?.map(item => this.transformMicroactivity(item)) || [];
     } catch (error) {
-      throw this.handleServiceError(error, 'Error al obtener por categoría');
+      throw this.handleServiceError(error, 'Error al obtener por categorï¿½a');
     }
   }
   async searchMicroactivities(searchTerm) {
@@ -34,7 +34,7 @@ export class MicroactivityService {
       const result = await this.repository.search(searchTerm);
       return result.data?.map(item => this.transformMicroactivity(item)) || [];
     } catch (error) {
-      throw this.handleServiceError(error, 'Error en búsqueda');
+      throw this.handleServiceError(error, 'Error en bï¿½squeda');
     }
   }
   async getFavorites(userId) {
@@ -88,10 +88,10 @@ export class MicroactivityService {
   async getStatistics() {
     try {
       const result = await this.repository.getStats();
-      return this.processResponse(result, 'Estadísticas obtenidas');
+      return this.processResponse(result, 'Estadï¿½sticas obtenidas');
     } catch (error) {
       this.logError('getStatistics', error);
-      throw this.createError('Error al obtener estadísticas', error);
+      throw this.createError('Error al obtener estadï¿½sticas', error);
     }
   }
   transformMicroactivitiesList(result) {
@@ -109,6 +109,8 @@ export class MicroactivityService {
       updatedAt: microactivity.updated_at,
       concentrationTime: microactivity.concentration_time,
       steps: this.parseSteps(microactivity.steps),
+      requirements: this.parseArray(microactivity.requirements),
+      benefits: this.parseArray(microactivity.benefits),
       duration: microactivity.duration, // Mantener en minutos para mostrar
       estimatedDuration: microactivity.duration * 60, // Convertir a segundos para el timer
       durationFormatted: this.formatDuration(microactivity.duration),
@@ -124,7 +126,9 @@ export class MicroactivityService {
       category: data.category, 
       duration: parseInt(data.duration),
       concentration_time: data.concentration_time ? parseInt(data.concentration_time) : null,
-      steps: Array.isArray(data.steps) ? data.steps : []
+      steps: Array.isArray(data.steps) ? data.steps : [],
+      requirements: Array.isArray(data.requirements) ? data.requirements : (data.requirements ? [data.requirements] : []),
+      benefits: Array.isArray(data.benefits) ? data.benefits : (data.benefits ? [data.benefits] : [])
     };
   }
   preprocessUpdateData(data) {
@@ -139,12 +143,28 @@ export class MicroactivityService {
     if (data.steps !== undefined) {
       processed.steps = Array.isArray(data.steps) ? data.steps : [];
     }
+    if (data.requirements !== undefined) {
+      processed.requirements = Array.isArray(data.requirements) ? data.requirements : (data.requirements ? [data.requirements] : []);
+    }
+    if (data.benefits !== undefined) {
+      processed.benefits = Array.isArray(data.benefits) ? data.benefits : (data.benefits ? [data.benefits] : []);
+    }
     return processed;
   }
   parseSteps(steps) {
     if (Array.isArray(steps)) return steps;
     if (typeof steps === 'string') {
       try { return JSON.parse(steps); } catch { return []; }
+    }
+    return [];
+  }
+  parseArray(arr) {
+    if (Array.isArray(arr)) return arr;
+    if (typeof arr === 'string') {
+      try { 
+        const parsed = JSON.parse(arr);
+        return Array.isArray(parsed) ? parsed : (parsed ? [parsed] : []);
+      } catch { return arr ? [arr] : []; }
     }
     return [];
   }
@@ -168,7 +188,7 @@ export class MicroactivityService {
       [CATEGORIES.CREATIVITY]: CATEGORIES.CREATIVITY,
       [CATEGORIES.BODY]: CATEGORIES.BODY
     };
-    return categoryMap[category] || category || 'Sin categoría';
+    return categoryMap[category] || category || 'Sin categorï¿½a';
   }
   getDefaultImage(category) {
     const imageMap = {
@@ -186,7 +206,7 @@ export class MicroactivityService {
   processResponse(result, message) {
     return {
       success: true,
-      message: message || 'Operación exitosa',
+      message: message || 'Operaciï¿½n exitosa',
       data: result.data || result
     };
   }

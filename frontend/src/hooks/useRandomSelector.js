@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { useTimer } from '../store/TimerContext';
-import microactivityTimerService from '../services/microactivityTimerService';
+import { useTimer } from 'contexts/TimerContext';
+import microactivityTimerService from 'services/microactivityTimerService';
 export default function useRandomSelector() {
   const {
     recentIds,

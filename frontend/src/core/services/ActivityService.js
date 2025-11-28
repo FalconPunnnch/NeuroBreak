@@ -1,4 +1,4 @@
-import apiClient from '../../infrastructure/api/apiClient';
+import apiClient from 'infrastructure/api/apiClient';
 import MicroactivityService from './MicroactivityService';
 import { ActivityHistory } from '../models/ActivityHistory';
 export class ActivityService {

@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">24.48% </span>
+                <span class="strong">20% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>12/49</span>
+                <span class='fraction'>10/50</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">14.28% </span>
+                <span class="strong">10.81% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>4/28</span>
+                <span class='fraction'>4/37</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>0/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">24.48% </span>
+                <span class="strong">20% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>12/49</span>
+                <span class='fraction'>10/50</span>
             </div>
         
             
@@ -170,9 +170,11 @@
 <a name='L105'></a><a href='#L105'>105</a>
 <a name='L106'></a><a href='#L106'>106</a>
 <a name='L107'></a><a href='#L107'>107</a>
-<a name='L108'></a><a href='#L108'>108</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<a name='L108'></a><a href='#L108'>108</a>
+<a name='L109'></a><a href='#L109'>109</a>
+<a name='L110'></a><a href='#L110'>110</a>
+<a name='L111'></a><a href='#L111'>111</a>
+<a name='L112'></a><a href='#L112'>112</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -199,6 +201,12 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -280,10 +288,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const MicrosoftStrategy = require('passport-microsoft').Strategy;
-const AuthService = require('../core/application/services/AuthService');
-const EmailService = require('../core/application/services/EmailService');
-const authService = new AuthService();
-const emailService = new EmailService();
+const authService = require('../services/AuthService');
+const emailService = require('../services/EmailService');
 passport.serializeUser(<span class="fstat-no" title="function not covered" >(u</span>ser, done) =&gt; {
 <span class="cstat-no" title="statement not covered" >  done(null, user.id);</span>
 });
@@ -306,19 +312,25 @@ passport.deserializeUser(<span class="fstat-no" title="function not covered" >as
       },
 <span class="fstat-no" title="function not covered" >      as</span>ync (accessToken, refreshToken, profile, done) =&gt; {
 <span class="cstat-no" title="statement not covered" >        try {</span>
+<span class="cstat-no" title="statement not covered" >          console.log('🔔 Google OAuth callback received. Profile summary: ', {</span>
+            id: profile.id,
+            displayName: profile.displayName,
+            emails: profile.emails &amp;&amp; profile.emails.map(<span class="fstat-no" title="function not covered" >e </span>=&gt; <span class="cstat-no" title="statement not covered" >e.value)</span>,
+            photos: profile.photos &amp;&amp; profile.photos.map(<span class="fstat-no" title="function not covered" >p </span>=&gt; <span class="cstat-no" title="statement not covered" >p.value)</span>
+          });
           const email = <span class="cstat-no" title="statement not covered" >profile.emails[0].value;</span>
           let user = <span class="cstat-no" title="statement not covered" >await authService.findUserByEmail(email);</span>
 <span class="cstat-no" title="statement not covered" >          if (user) {</span>
-<span class="cstat-no" title="statement not covered" >            console.log(`✅ Usuario existente login con Google: ${email}`);</span>
+<span class="cstat-no" title="statement not covered" >            console.log(`✅ Usuario existente login con Google: ${email} (role: ${user.role})`);</span>
 <span class="cstat-no" title="statement not covered" >            return done(null, user);</span>
           }
 <span class="cstat-no" title="statement not covered" >          user = await authService.createUser({</span>
-            firstName: profile.name.givenName || profile.displayName.split(' ')[0],
-            lastName: profile.name.familyName || profile.displayName.split(' ')[1] || '',
+            firstName: (profile.name?.givenName || (profile.displayName ? profile.displayName.split(' ')[0] : '') || 'Usuario').trim(),
+            lastName: (profile.name?.familyName || (profile.displayName ? profile.displayName.split(' ')[1] : '') || '').trim(),
             email: email,
             password: null, // No tiene contraseña (OAuth)
             role: 'student',
-            profilePicture: profile.photos[0]?.value || null
+            profilePicture: profile.photos?.[0]?.value || null
           });
 <span class="cstat-no" title="statement not covered" >          console.log(`✅ Nuevo usuario creado con Google: ${email}`);</span>
 <span class="cstat-no" title="statement not covered" >          try {</span>
@@ -391,7 +403,7 @@ module.exports = passport;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-11-26T09:30:27.056Z
+                at 2025-11-27T23:58:10.311Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

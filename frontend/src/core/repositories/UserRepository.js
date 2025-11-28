@@ -1,4 +1,4 @@
-import apiClient from '../../config/api.config';
+import apiClient from 'config/api.config';
 export class UserRepository {
   async findAll() {
     const response = await apiClient.get('/users');

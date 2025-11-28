@@ -14,11 +14,11 @@ app.use((req, res, next) => {
   console.log(`${req.method} ${req.path}`);
   next();
 });
-const authRoutes = require('./infrastructure/api/routes/auth.routes');
-const userRoutes = require('./infrastructure/api/routes/user.routes');
-const microactivityRoutes = require('./infrastructure/api/routes/microactivity.routes');
-const activityHistoryRoutes = require('./application/routes/activityHistoryRoutes');
-const moodRoutes = require('./application/routes/moodRoutes');
+const authRoutes = require('./api/routes/auth.routes');
+const userRoutes = require('./api/routes/user.routes');
+const microactivityRoutes = require('./api/routes/microactivity.routes');
+const activityHistoryRoutes = require('./api/routes/activityHistoryRoutes');
+const moodRoutes = require('./api/routes/moodRoutes');
 app.get('/', (req, res) => {
   res.json({ 
     message: '?? NeuroBreak API',

@@ -1,5 +1,9 @@
 const db = require('./connection');
 const logger = require('../../utils/logger');
+function getDurationLabel(minutes) {
+  if (minutes === 1) return '1 minuto';
+  return `${minutes} minutos`;
+}
 const sampleMicroactivities = [
   {
     title: 'Respiración Profunda',
@@ -13,7 +17,17 @@ const sampleMicroactivities = [
       'Mantén la respiración durante 4 segundos',
       'Exhala lentamente por la boca durante 6 segundos',
       'Repite el ciclo 10 veces'
-    ])
+    ]),
+    requirements: (durationLabel => [
+      'Un espacio cómodo y tranquilo',
+      `${durationLabel} de tiempo disponible`,
+      'Actitud positiva y ganas de relajarte'
+    ])(getDurationLabel(5)),
+    benefits: [
+      'Reduce el estrés y la ansiedad',
+      'Mejora el enfoque y la concentración',
+      'Aumenta el bienestar general'
+    ]
   },
   {
     title: 'Dibujo Creativo',
@@ -27,7 +41,17 @@ const sampleMicroactivities = [
       'Comienza a dibujar sin restricciones',
       'Enfócate en el proceso, no en el resultado',
       'Disfruta la experiencia creativa'
-    ])
+    ]),
+    requirements: (durationLabel => [
+      'Un espacio cómodo y tranquilo',
+      `${durationLabel} de tiempo disponible`,
+      'Actitud positiva y ganas de relajarte'
+    ])(getDurationLabel(15)),
+    benefits: [
+      'Reduce el estrés y la ansiedad',
+      'Mejora el enfoque y la concentración',
+      'Aumenta el bienestar general'
+    ]
   },
   {
     title: 'Estiramiento Básico',
@@ -41,7 +65,17 @@ const sampleMicroactivities = [
       'Estira los brazos hacia arriba',
       'Flexiona la espalda suavemente',
       'Estira las piernas una por una'
-    ])
+    ]),
+    requirements: (durationLabel => [
+      'Un espacio cómodo y tranquilo',
+      `${durationLabel} de tiempo disponible`,
+      'Actitud positiva y ganas de relajarte'
+    ])(getDurationLabel(5)),
+    benefits: [
+      'Reduce el estrés y la ansiedad',
+      'Mejora el enfoque y la concentración',
+      'Aumenta el bienestar general'
+    ]
   },
   {
     title: 'Meditación Mindfulness',
@@ -55,7 +89,17 @@ const sampleMicroactivities = [
       'Cierra los ojos suavemente',
       'Enfoca tu atención en la respiración',
       'Observa tus pensamientos sin juzgarlos'
-    ])
+    ]),
+    requirements: (durationLabel => [
+      'Un espacio cómodo y tranquilo',
+      `${durationLabel} de tiempo disponible`,
+      'Actitud positiva y ganas de relajarte'
+    ])(getDurationLabel(8)),
+    benefits: [
+      'Reduce el estrés y la ansiedad',
+      'Mejora el enfoque y la concentración',
+      'Aumenta el bienestar general'
+    ]
   },
   {
     title: 'Escritura Creativa',
@@ -69,7 +113,17 @@ const sampleMicroactivities = [
       'Escribe continuamente sin detenerte',
       'No te preocupes por la gramática',
       'Deja fluir tus ideas libremente'
-    ])
+    ]),
+    requirements: (durationLabel => [
+      'Un espacio cómodo y tranquilo',
+      `${durationLabel} de tiempo disponible`,
+      'Actitud positiva y ganas de relajarte'
+    ])(getDurationLabel(10)),
+    benefits: [
+      'Reduce el estrés y la ansiedad',
+      'Mejora el enfoque y la concentración',
+      'Aumenta el bienestar general'
+    ]
   },
   {
     title: 'Movilidad Energética',
@@ -83,7 +137,17 @@ const sampleMicroactivities = [
       'Eleva rodillas alternadas durante 20 segundos',
       'Haz giros suaves de torso a ambos lados',
       'Respira profundo y finaliza con estiramiento de brazos'
-    ])
+    ]),
+    requirements: (durationLabel => [
+      'Un espacio cómodo y tranquilo',
+      `${durationLabel} de tiempo disponible`,
+      'Actitud positiva y ganas de relajarte'
+    ])(getDurationLabel(5)),
+    benefits: [
+      'Reduce el estrés y la ansiedad',
+      'Mejora el enfoque y la concentración',
+      'Aumenta el bienestar general'
+    ]
   },
   {
     title: 'Visualización Positiva',
@@ -97,7 +161,17 @@ const sampleMicroactivities = [
       'Imagina un lugar que te haga feliz',
       'Visualiza detalles vívidos del lugar',
       'Mantén la imagen positiva en tu mente'
-    ])
+    ]),
+    requirements: (durationLabel => [
+      'Un espacio cómodo y tranquilo',
+      `${durationLabel} de tiempo disponible`,
+      'Actitud positiva y ganas de relajarte'
+    ])(getDurationLabel(5)),
+    benefits: [
+      'Reduce el estrés y la ansiedad',
+      'Mejora el enfoque y la concentración',
+      'Aumenta el bienestar general'
+    ]
   },
   {
     title: 'Collage Digital Express',
@@ -111,7 +185,17 @@ const sampleMicroactivities = [
       'Experimenta con diferentes composiciones',
       'Ajusta colores y efectos',
       'Crea tu obra final'
-    ])
+    ]),
+    requirements: (durationLabel => [
+      'Un espacio cómodo y tranquilo',
+      `${durationLabel} de tiempo disponible`,
+      'Actitud positiva y ganas de relajarte'
+    ])(getDurationLabel(10)),
+    benefits: [
+      'Reduce el estrés y la ansiedad',
+      'Mejora el enfoque y la concentración',
+      'Aumenta el bienestar general'
+    ]
   },
   {
     title: 'Ejercicios de Fuerza y Resistencia',
@@ -127,7 +211,17 @@ const sampleMicroactivities = [
       'Mantén posición de plancha por 30 segundos',
       'Repite el circuito 3 veces',
       'Haz estiramientos suaves al finalizar'
-    ])
+    ]),
+    requirements: (durationLabel => [
+      'Un espacio cómodo y tranquilo',
+      `${durationLabel} de tiempo disponible`,
+      'Actitud positiva y ganas de relajarte'
+    ])(getDurationLabel(20)),
+    benefits: [
+      'Reduce el estrés y la ansiedad',
+      'Mejora el enfoque y la concentración',
+      'Aumenta el bienestar general'
+    ]
   },
   {
     title: 'Organización Rápida',
@@ -141,7 +235,17 @@ const sampleMicroactivities = [
       'Limpia rápidamente tu superficie principal',
       'Organiza cables o accesorios visibles',
       'Respira profundo y observa la diferencia'
-    ])
+    ]),
+    requirements: (durationLabel => [
+      'Un espacio cómodo y tranquilo',
+      `${durationLabel} de tiempo disponible`,
+      'Actitud positiva y ganas de relajarte'
+    ])(getDurationLabel(5)),
+    benefits: [
+      'Reduce el estrés y la ansiedad',
+      'Mejora el enfoque y la concentración',
+      'Aumenta el bienestar general'
+    ]
   },
   {
     title: 'Impro Musical',
@@ -155,7 +259,17 @@ const sampleMicroactivities = [
       'Improvisa sonidos sin buscar perfección',
       'Explora diferentes intensidades',
       'Escucha lo que creaste por unos segundos'
-    ])
+    ]),
+    requirements: (durationLabel => [
+      'Un espacio cómodo y tranquilo',
+      `${durationLabel} de tiempo disponible`,
+      'Actitud positiva y ganas de relajarte'
+    ])(getDurationLabel(10)),
+    benefits: [
+      'Reduce el estrés y la ansiedad',
+      'Mejora el enfoque y la concentración',
+      'Aumenta el bienestar general'
+    ]
   },
   {
     title: 'Movilidad Suave',
@@ -169,7 +283,17 @@ const sampleMicroactivities = [
       'Rota la cadera suavemente',
       'Flexiona rodillas y tobillos',
       'Respira profundo para terminar'
-    ])
+    ]),
+    requirements: (durationLabel => [
+      'Un espacio cómodo y tranquilo',
+      `${durationLabel} de tiempo disponible`,
+      'Actitud positiva y ganas de relajarte'
+    ])(getDurationLabel(5)),
+    benefits: [
+      'Reduce el estrés y la ansiedad',
+      'Mejora el enfoque y la concentración',
+      'Aumenta el bienestar general'
+    ]
   },
   {
     title: 'Escritura de Gratitud Express',
@@ -183,7 +307,17 @@ const sampleMicroactivities = [
       'Añade una frase positiva para ti misma',
       'Lee todo en voz baja',
       'Respira profundo y cierra la nota'
-    ])
+    ]),
+    requirements: (durationLabel => [
+      'Un espacio cómodo y tranquilo',
+      `${durationLabel} de tiempo disponible`,
+      'Actitud positiva y ganas de relajarte'
+    ])(getDurationLabel(3)),
+    benefits: [
+      'Reduce el estrés y la ansiedad',
+      'Mejora el enfoque y la concentración',
+      'Aumenta el bienestar general'
+    ]
   },
   {
     title: 'Mini Fotografía Creativa',
@@ -197,7 +331,17 @@ const sampleMicroactivities = [
       'Enfoca desde distintos ángulos',
       'Toma una foto que represente una emoción',
       'Observa tu foto final y nómbrala mentalmente'
-    ])
+    ]),
+    requirements: (durationLabel => [
+      'Un espacio cómodo y tranquilo',
+      `${durationLabel} de tiempo disponible`,
+      'Actitud positiva y ganas de relajarte'
+    ])(getDurationLabel(5)),
+    benefits: [
+      'Reduce el estrés y la ansiedad',
+      'Mejora el enfoque y la concentración',
+      'Aumenta el bienestar general'
+    ]
   },
   {
     title: 'Auto-Masaje Relajante',
@@ -210,7 +354,17 @@ const sampleMicroactivities = [
       'Con las yemas de los dedos masajea suavemente la base del cuello, bajo la nuca',
       'Realiza movimientos circulares en las sienes por 20–30 segundos',
       'Respira profundo para finalizar'
-    ])
+    ]),
+    requirements: (durationLabel => [
+      'Un espacio cómodo y tranquilo',
+      `${durationLabel} de tiempo disponible`,
+      'Actitud positiva y ganas de relajarte'
+    ])(getDurationLabel(5)),
+    benefits: [
+      'Reduce el estrés y la ansiedad',
+      'Mejora el enfoque y la concentración',
+      'Aumenta el bienestar general'
+    ]
   }
 ];
 async function seedMicroactivities() {
@@ -222,8 +376,8 @@ async function seedMicroactivities() {
       const result = await db.query(
         `INSERT INTO microactivities (
           title, description, category, duration, concentration_time, 
-          steps, created_at, updated_at
-        ) VALUES ($1, $2, $3, $4, $5, $6, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) 
+          steps, requirements, benefits, created_at, updated_at
+        ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) 
         RETURNING id, title`,
         [
           microactivity.title,
@@ -231,7 +385,9 @@ async function seedMicroactivities() {
           microactivity.category,
           microactivity.duration,
           microactivity.concentration_time,
-          microactivity.steps
+          microactivity.steps,
+          JSON.stringify(microactivity.requirements),
+          JSON.stringify(microactivity.benefits)
         ]
       );
       logger.info(`✅ Microactividad creada: ${result.rows[0].title} (ID: ${result.rows[0].id})`);

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useCallback } from 'react';
-import { useTimer } from '../store/TimerContext';
-import { TimerStrategyFactory } from '../patterns/strategies/TimerStrategy';
+import { useTimer } from 'contexts/TimerContext';
+import { TimerStrategyFactory } from 'patterns/strategies/TimerStrategy';
 export default function useConcentrationTimer(timerType = 'countdown') {
   const {
     duration,

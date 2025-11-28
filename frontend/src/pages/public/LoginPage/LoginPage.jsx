@@ -3,6 +3,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from 'contexts/AuthContext';
 import Header from 'components/layout/Header/Header';
 import './LoginPage.css';
+import brainImg from 'assets/images/brain-1.png';
+import pesasImg from 'assets/images/pesas.png';
+import piezaImg from 'assets/images/pieza.png';
 const LoginPage = () => {
   const navigate = useNavigate();
   const { login } = useAuth(); // Hook que implementa Strategy pattern
@@ -81,19 +84,19 @@ const LoginPage = () => {
             <div className="info-circles">
               <div className="info-circle mente">
                 <div className="circle-icon">
-                  <span className="icon-emoji">??</span>
+                  <img src={brainImg} alt="Mente" className="circle-img" />
                 </div>
                 <p className="circle-label">Mente</p>
               </div>
               <div className="info-circle cuerpo">
                 <div className="circle-icon">
-                  <span className="icon-emoji">??</span>
+                  <img src={pesasImg} alt="Cuerpo" className="circle-img" />
                 </div>
                 <p className="circle-label">Cuerpo</p>
               </div>
               <div className="info-circle creatividad">
                 <div className="circle-icon">
-                  <span className="icon-emoji">??</span>
+                  <img src={piezaImg} alt="Creatividad" className="circle-img" />
                 </div>
                 <p className="circle-label">Creatividad</p>
               </div>

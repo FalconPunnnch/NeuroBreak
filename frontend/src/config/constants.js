@@ -16,9 +16,9 @@ export const MOOD_OPTIONS = [
   { emoji: '??', value: 'stressed', label: 'Estresado' }
 ];
 export const DURATIONS = {
-  SHORT: { min: 0, max: 5, label: '0-5 min' },
-  MEDIUM: { min: 5, max: 10, label: '5-10 min' },
-  LONG: { min: 10, max: 20, label: '10-20 min' }
+  SHORT: { min: 0, max: 6, label: '0-5 min' },
+  MEDIUM: { min: 6, max: 11, label: '5-10 min' },
+  LONG: { min: 11, max: 20, label: '10-20 min' }
 };
 export const VALIDATION = {
   MIN_SEARCH_LENGTH: 2,

@@ -56,9 +56,58 @@ class MicroactivityRepository {
         concentration_time,
         steps,
         image_url,
-        createdBy,
+        requirements,
+        benefits,
         createdAt
       } = data;
+      // Procesar steps
+      let stepsValue = steps;
+      if (steps !== undefined && steps !== null) {
+        if (typeof steps === 'object') {
+          stepsValue = JSON.stringify(steps);
+        } else if (typeof steps === 'string') {
+          try {
+            JSON.parse(steps);
+            stepsValue = steps;
+          } catch {
+            stepsValue = JSON.stringify(steps);
+          }
+        }
+      } else {
+        stepsValue = null;
+      }
+      // Procesar requirements
+      let requirementsValue = requirements;
+      if (requirements !== undefined && requirements !== null) {
+        if (typeof requirements === 'object') {
+          requirementsValue = JSON.stringify(requirements);
+        } else if (typeof requirements === 'string') {
+          try {
+            JSON.parse(requirements);
+            requirementsValue = requirements;
+          } catch {
+            requirementsValue = JSON.stringify(requirements);
+          }
+        }
+      } else {
+        requirementsValue = null;
+      }
+      // Procesar benefits
+      let benefitsValue = benefits;
+      if (benefits !== undefined && benefits !== null) {
+        if (typeof benefits === 'object') {
+          benefitsValue = JSON.stringify(benefits);
+        } else if (typeof benefits === 'string') {
+          try {
+            JSON.parse(benefits);
+            benefitsValue = benefits;
+          } catch {
+            benefitsValue = JSON.stringify(benefits);
+          }
+        }
+      } else {
+        benefitsValue = null;
+      }
       const result = await this.db.query(
         `INSERT INTO microactivities (
           title, description, category, duration, concentration_time,
@@ -71,10 +120,10 @@ class MicroactivityRepository {
           category,
           duration,
           concentration_time || null,
-          steps ? JSON.stringify(steps) : null,
+          stepsValue,
           image_url || null,
-          data.requirements || null,
-          data.benefits || null,
+          requirementsValue,
+          benefitsValue,
           createdAt
         ]
       );

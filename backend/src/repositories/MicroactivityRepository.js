@@ -96,6 +96,55 @@ class MicroactivityRepository {
         requirements,
         benefits
       } = data;
+      // Si steps es un array u objeto, serializar; si es string, dejar igual o null
+      let stepsValue = steps;
+      if (steps !== undefined && steps !== null) {
+        if (typeof steps === 'object') {
+          stepsValue = JSON.stringify(steps);
+        } else if (typeof steps === 'string') {
+          // Verificar si es un JSON válido, si no, dejar como está
+          try {
+            JSON.parse(steps);
+            stepsValue = steps;
+          } catch {
+            // Si no es JSON válido, intentar serializar
+            stepsValue = JSON.stringify(steps);
+          }
+        }
+      } else {
+        stepsValue = null;
+      }
+      // Lo mismo para requirements y benefits
+      let requirementsValue = requirements;
+      if (requirements !== undefined && requirements !== null) {
+        if (typeof requirements === 'object') {
+          requirementsValue = JSON.stringify(requirements);
+        } else if (typeof requirements === 'string') {
+          try {
+            JSON.parse(requirements);
+            requirementsValue = requirements;
+          } catch {
+            requirementsValue = JSON.stringify(requirements);
+          }
+        }
+      } else {
+        requirementsValue = null;
+      }
+      let benefitsValue = benefits;
+      if (benefits !== undefined && benefits !== null) {
+        if (typeof benefits === 'object') {
+          benefitsValue = JSON.stringify(benefits);
+        } else if (typeof benefits === 'string') {
+          try {
+            JSON.parse(benefits);
+            benefitsValue = benefits;
+          } catch {
+            benefitsValue = JSON.stringify(benefits);
+          }
+        }
+      } else {
+        benefitsValue = null;
+      }
       const result = await this.db.query(
         `UPDATE microactivities SET
           title = COALESCE($1, title),
@@ -116,10 +165,10 @@ class MicroactivityRepository {
           category,
           duration,
           concentration_time,
-          steps ? JSON.stringify(steps) : steps,
+          stepsValue,
           image_url,
-          requirements,
-          benefits,
+          requirementsValue,
+          benefitsValue,
           id
         ]
       );

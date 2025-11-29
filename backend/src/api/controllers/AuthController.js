@@ -256,12 +256,16 @@ class AuthController {
         });
       }
       const user = await this.authService.findUserByEmail(email.toLowerCase());
+      
+      // Si el usuario no existe, indicar que el correo no está registrado
       if (!user) {
-        return res.status(200).json({
-          success: true,
-          message: 'Si el correo existe, recibirás un email con instrucciones'
+        return res.status(404).json({
+          success: false,
+          message: 'No existe una cuenta registrada con este correo electrónico'
         });
       }
+      
+      // Si es cuenta OAuth (sin contraseña), rechazar con mensaje específico
       if (!user.password || user.password === null) {
         return res.status(400).json({
           success: false,
